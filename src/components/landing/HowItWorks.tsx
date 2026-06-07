@@ -26,20 +26,20 @@ export function HowItWorks() {
   return (
     <section id="como-funciona" className="py-20 md:py-28 bg-sand-soft">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <Reveal className="text-center max-w-2xl mx-auto">
-          <h2 className="font-display font-extrabold text-3xl md:text-5xl text-ink">
+        <div className="text-center max-w-2xl mx-auto">
+          <Reveal as="h2" className="font-display font-extrabold text-3xl md:text-5xl text-ink">
             Como funciona
-          </h2>
-          <p className="mt-4 text-ink/65 text-lg">
+          </Reveal>
+          <Reveal as="p" delay={120} className="mt-4 text-ink/65 text-lg">
             Três passinhos curtos até seu roteiro estar pronto.
-          </p>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {steps.map((s, i) => (
             <Reveal
               key={s.title}
-              delay={i * 120}
+              delay={260 + i * 140}
               className="group bg-white rounded-3xl p-7 shadow-soft hover:shadow-soft-lg hover:-translate-y-1.5 transition-all duration-300 cursor-default"
             >
               <div
@@ -58,7 +58,7 @@ export function HowItWorks() {
           ))}
         </div>
 
-        <Reveal delay={200} className="mt-12 flex justify-center">
+        <Reveal delay={720} className="mt-12 flex justify-center">
           <a
             href="#criar"
             className="press group inline-flex items-center justify-center rounded-full bg-ink px-7 py-3.5 text-base font-bold text-white hover:bg-sea hover:-translate-y-0.5 hover:shadow-soft-lg"

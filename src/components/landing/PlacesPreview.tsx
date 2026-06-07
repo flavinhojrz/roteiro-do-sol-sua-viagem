@@ -35,20 +35,20 @@ export function PlacesPreview() {
   return (
     <section id="lugares" className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <Reveal className="max-w-2xl">
-          <h2 className="font-display font-extrabold text-3xl md:text-5xl text-ink">
+        <div className="max-w-2xl">
+          <Reveal as="h2" className="font-display font-extrabold text-3xl md:text-5xl text-ink">
             Alguns lugares que podem aparecer no seu roteiro
-          </h2>
-          <p className="mt-4 text-ink/65 text-lg">
+          </Reveal>
+          <Reveal as="p" delay={120} className="mt-4 text-ink/65 text-lg">
             Esses são só alguns exemplos. O seu roteiro muda conforme sua vibe.
-          </p>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <div className="mt-12 flex md:grid md:grid-cols-2 gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 md:overflow-visible pb-4 md:pb-0">
           {places.map((p, i) => (
             <Reveal
               key={p.name}
-              delay={i * 120}
+              delay={260 + i * 130}
               as="article"
               className="group shrink-0 w-[85%] md:w-auto snap-start bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-soft-lg hover:-translate-y-2 transition-all duration-500 cursor-pointer"
             >
