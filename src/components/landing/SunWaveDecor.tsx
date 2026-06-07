@@ -34,12 +34,7 @@ export function Waves({
   color?: string;
 }) {
   return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1440 120"
-      preserveAspectRatio="none"
-      className={className}
-    >
+    <svg aria-hidden viewBox="0 0 1440 120" preserveAspectRatio="none" className={className}>
       <path
         d="M0,64 C240,112 480,16 720,48 C960,80 1200,112 1440,64 L1440,120 L0,120 Z"
         fill={color}

@@ -5,6 +5,7 @@ Landing page estática, leve e tropical para um produto de roteiros turísticos 
 ## Identidade visual (design tokens em `src/styles.css`)
 
 Substituir a paleta default por tokens tropicais (em oklch, mas mapeando as cores do brief):
+
 - `--sand` (#FFF3D6) → background base
 - `--sun` (#FFB703) → accent / sol
 - `--sea` (#00A6D6) → primary
@@ -16,6 +17,7 @@ Substituir a paleta default por tokens tropicais (em oklch, mas mapeando as core
 Fonte: **Nunito Sans** (corpo) + **Poppins** (display), carregadas via `<link>` no `__root.tsx` head e mapeadas em `@theme` como `--font-sans` e `--font-display`.
 
 Detalhes globais:
+
 - Cantos arredondados (radius padrão ~1rem, cards 1.5rem)
 - Sombras suaves coloridas (tom azul/areia, baixa opacidade)
 - Gradientes suaves areia → azul claro
@@ -71,6 +73,7 @@ No `index.tsx` `head()`: title "Roteiro do Sol — Descubra Natal na sua vibe", 
 ## Imagens
 
 Gerar 4 fotos estilo turismo ensolarado em `src/assets/places/` via imagegen (fast quality, 1024x768 jpg):
+
 - Ponta Negra (Morro do Careca ao pôr do sol)
 - Genipabu (dunas com buggy)
 - Parque das Dunas (mata atlântica verde)

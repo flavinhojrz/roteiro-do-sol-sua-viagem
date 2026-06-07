@@ -28,18 +28,10 @@ export function OptionCard({
       )}
     >
       <div className="flex items-start gap-3">
-        {icon && (
-          <span className="text-2xl md:text-3xl leading-none mt-0.5">{icon}</span>
-        )}
+        {icon && <span className="text-2xl md:text-3xl leading-none mt-0.5">{icon}</span>}
         <div className="flex-1 min-w-0">
-          <h3 className="font-display font-bold text-base md:text-lg text-ink">
-            {title}
-          </h3>
-          {description && (
-            <p className="mt-1 text-sm text-ink/65 leading-relaxed">
-              {description}
-            </p>
-          )}
+          <h3 className="font-display font-bold text-base md:text-lg text-ink">{title}</h3>
+          {description && <p className="mt-1 text-sm text-ink/65 leading-relaxed">{description}</p>}
         </div>
         <span
           aria-hidden

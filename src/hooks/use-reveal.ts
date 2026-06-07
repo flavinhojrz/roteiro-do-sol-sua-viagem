@@ -1,8 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 // SSR-safe layout effect
-const useIsoLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 // Single shared observer keeps timing consistent across many elements,
 // even when the user scrolls quickly.
@@ -45,9 +44,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>() {
       return;
     }
 
-    const reduced = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     const rect = el.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;

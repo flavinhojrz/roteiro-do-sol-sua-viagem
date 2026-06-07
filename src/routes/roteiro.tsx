@@ -35,13 +35,11 @@ function RoteiroPage() {
           </span>
           <h1 className="mt-5 font-display font-extrabold text-3xl md:text-5xl leading-tight text-ink">
             Lugares que combinam com{" "}
-            <span className="bg-gradient-sun bg-clip-text text-transparent">
-              sua vibe ☀️
-            </span>
+            <span className="bg-gradient-sun bg-clip-text text-transparent">sua vibe ☀️</span>
           </h1>
           <p className="mt-4 text-ink/65 text-base md:text-lg max-w-xl mx-auto md:mx-0">
-            Em breve, aqui você vai ver os lugares selecionados para a sua viagem.
-            Estamos preparando o catálogo com muito carinho.
+            Em breve, aqui você vai ver os lugares selecionados para a sua viagem. Estamos
+            preparando o catálogo com muito carinho.
           </p>
         </div>
 

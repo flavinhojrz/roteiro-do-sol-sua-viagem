@@ -66,16 +66,30 @@ function OnboardingPage() {
 
   const canContinue = (() => {
     switch (step) {
-      case 1: return !!answers.company;
-      case 2: return !!answers.days;
-      case 3: return answers.vibes.length > 0;
-      case 4: return !!answers.budget;
-      case 5: return !!answers.range;
-      default: return false;
+      case 1:
+        return !!answers.company;
+      case 2:
+        return !!answers.days;
+      case 3:
+        return answers.vibes.length > 0;
+      case 4:
+        return !!answers.budget;
+      case 5:
+        return !!answers.range;
+      default:
+        return false;
     }
   })();
 
-  if (phase === "intro") return <Intro onStart={() => { setPhase("quiz"); setStep(1); }} />;
+  if (phase === "intro")
+    return (
+      <Intro
+        onStart={() => {
+          setPhase("quiz");
+          setStep(1);
+        }}
+      />
+    );
   if (phase === "preparing") return <Preparing transition={transition} />;
 
   return (
@@ -236,12 +250,7 @@ function OnboardingPage() {
         )}
       </div>
 
-      <NavBar
-        onBack={goBack}
-        onNext={goNext}
-        canContinue={canContinue}
-        isLast={step === TOTAL}
-      />
+      <NavBar onBack={goBack} onNext={goNext} canContinue={canContinue} isLast={step === TOTAL} />
     </StepShell>
   );
 }
@@ -340,15 +349,14 @@ function Intro({ onStart }: { onStart: () => void }) {
           className="mt-5 font-display font-extrabold text-3xl sm:text-4xl md:text-5xl leading-[1.1] text-ink animate-fade-up"
         >
           Bora montar seu roteiro{" "}
-          <span className="bg-gradient-sun bg-clip-text text-transparent">
-            em Natal?
-          </span>
+          <span className="bg-gradient-sun bg-clip-text text-transparent">em Natal?</span>
         </h1>
         <p
           style={{ animationDelay: "0.25s" }}
           className="mt-4 text-base md:text-lg text-ink/70 max-w-lg leading-relaxed animate-fade-up"
         >
-          Responda algumas perguntas rápidas e a gente separa lugares que combinam com sua vibe de viagem.
+          Responda algumas perguntas rápidas e a gente separa lugares que combinam com sua vibe de
+          viagem.
         </p>
 
         <div
@@ -361,16 +369,15 @@ function Intro({ onStart }: { onStart: () => void }) {
             className="press group inline-flex items-center justify-center rounded-full bg-coral px-10 py-4 text-lg font-bold text-white shadow-coral hover:shadow-coral-lg hover:-translate-y-0.5"
           >
             Começar
-            <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+            <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1.5">
+              →
+            </span>
           </button>
           <p className="text-sm text-ink/60">Leva menos de 2 minutos ☀️</p>
         </div>
 
         {/* Decorative mini cards */}
-        <div
-          style={{ animationDelay: "0.55s" }}
-          className="mt-12 flex gap-3 animate-fade-up"
-        >
+        <div style={{ animationDelay: "0.55s" }} className="mt-12 flex gap-3 animate-fade-up">
           {["🌊", "🌅", "🏖️", "🥥", "🧭"].map((e, i) => (
             <div
               key={i}
@@ -386,11 +393,7 @@ function Intro({ onStart }: { onStart: () => void }) {
   );
 }
 
-function Preparing({
-  transition,
-}: {
-  transition: ReturnType<typeof pickTransition>;
-}) {
+function Preparing({ transition }: { transition: ReturnType<typeof pickTransition> }) {
   return (
     <div className="relative min-h-screen bg-gradient-sky overflow-hidden flex items-center justify-center px-5">
       <SunBurst className="pointer-events-none absolute -top-10 -right-10 w-80 h-80 md:w-[32rem] md:h-[32rem] opacity-60 animate-sun-pulse" />

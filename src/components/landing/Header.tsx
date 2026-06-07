@@ -37,9 +37,10 @@ export function Header() {
             className="press group inline-flex items-center justify-center rounded-full bg-coral px-5 py-2.5 text-sm font-bold text-white shadow-coral hover:shadow-coral-lg hover:-translate-y-0.5"
           >
             Criar meu roteiro
-            <span className="ml-1.5 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+            <span className="ml-1.5 inline-block transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
           </Link>
-
         </nav>
 
         <div className="md:hidden flex items-center gap-2">

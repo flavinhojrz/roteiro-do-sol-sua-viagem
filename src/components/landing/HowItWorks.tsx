@@ -64,7 +64,9 @@ export function HowItWorks() {
             className="press group inline-flex items-center justify-center rounded-full bg-ink px-7 py-3.5 text-base font-bold text-white hover:bg-sea hover:-translate-y-0.5 hover:shadow-soft-lg"
           >
             Começar agora
-            <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+            <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1.5">
+              →
+            </span>
           </a>
         </Reveal>
       </div>
