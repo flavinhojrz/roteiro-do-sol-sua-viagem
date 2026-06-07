@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { SunBurst, Waves } from "./SunWaveDecor";
 import { Reveal } from "./Reveal";
 
@@ -25,13 +26,13 @@ export function FinalCTA() {
             minutos.
           </Reveal>
           <Reveal delay={300} className="mt-9 flex flex-col items-center gap-3">
-            <a
-              href="#criar"
+            <Link
+              to="/onboarding"
               className="press group inline-flex items-center justify-center rounded-full bg-coral px-9 py-4 text-lg font-bold text-white shadow-coral hover:shadow-coral-lg hover:-translate-y-0.5"
             >
               Criar meu roteiro
               <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-            </a>
+            </Link>
             <p className="text-sm text-ink/60">
               Sem cadastro chato. Só boas vibes. ☀️
             </p>
