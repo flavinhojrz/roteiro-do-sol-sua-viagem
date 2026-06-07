@@ -1,4 +1,5 @@
 import { Sparkles, Map, Heart } from "lucide-react";
+import { Reveal } from "./Reveal";
 
 const steps = [
   {
@@ -25,23 +26,24 @@ export function HowItWorks() {
   return (
     <section id="como-funciona" className="py-20 md:py-28 bg-sand-soft">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <div className="text-center max-w-2xl mx-auto">
+        <Reveal className="text-center max-w-2xl mx-auto">
           <h2 className="font-display font-extrabold text-3xl md:text-5xl text-ink">
             Como funciona
           </h2>
           <p className="mt-4 text-ink/65 text-lg">
             Três passinhos curtos até seu roteiro estar pronto.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {steps.map((s, i) => (
-            <div
+            <Reveal
               key={s.title}
-              className="group bg-white rounded-3xl p-7 shadow-soft hover:-translate-y-1.5 transition-transform duration-300"
+              delay={i * 120}
+              className="group bg-white rounded-3xl p-7 shadow-soft hover:shadow-soft-lg hover:-translate-y-1.5 transition-all duration-300 cursor-default"
             >
               <div
-                className={`w-14 h-14 rounded-2xl flex items-center justify-center ${s.color}`}
+                className={`w-14 h-14 rounded-2xl flex items-center justify-center ${s.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-6deg]`}
               >
                 <s.icon size={26} strokeWidth={2.2} />
               </div>
@@ -52,18 +54,19 @@ export function HowItWorks() {
                 {s.title}
               </h3>
               <p className="mt-3 text-ink/65 leading-relaxed">{s.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <Reveal delay={200} className="mt-12 flex justify-center">
           <a
             href="#criar"
-            className="inline-flex items-center justify-center rounded-full bg-ink px-7 py-3.5 text-base font-bold text-white hover:bg-sea transition-colors"
+            className="press group inline-flex items-center justify-center rounded-full bg-ink px-7 py-3.5 text-base font-bold text-white hover:bg-sea hover:-translate-y-0.5 hover:shadow-soft-lg"
           >
-            Começar agora →
+            Começar agora
+            <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
