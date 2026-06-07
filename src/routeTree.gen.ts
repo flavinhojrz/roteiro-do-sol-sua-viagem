@@ -18,11 +18,13 @@ const RoteiroRoute = RoteiroRouteImport.update({
   path: '/roteiro',
   getParentRoute: () => rootRouteImport,
 } as any)
+
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -61,11 +63,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/roteiro': {
-      id: '/roteiro'
-      path: '/roteiro'
-      fullPath: '/roteiro'
-      preLoaderRoute: typeof RoteiroRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -75,11 +77,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/roteiro': {
+      id: '/roteiro'
+      path: '/roteiro'
+      fullPath: '/roteiro'
+      preLoaderRoute: typeof RoteiroRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -93,13 +95,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
