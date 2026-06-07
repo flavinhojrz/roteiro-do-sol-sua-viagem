@@ -1,29 +1,43 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/landing/Header";
+import { Hero } from "@/components/landing/Hero";
+import { HowItWorks } from "@/components/landing/HowItWorks";
+import { PlacesPreview } from "@/components/landing/PlacesPreview";
+import { FinalCTA } from "@/components/landing/FinalCTA";
+import { Footer } from "@/components/landing/Footer";
+import { MobileStickyCTA } from "@/components/landing/MobileStickyCTA";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Roteiro do Sol — Descubra Natal na sua vibe" },
+      {
+        name: "description",
+        content:
+          "Monte um roteiro personalizado de Natal/RN com praias, passeios e experiências que combinam com seu jeito de viajar.",
+      },
+      { property: "og:title", content: "Roteiro do Sol — Descubra Natal na sua vibe" },
+      {
+        property: "og:description",
+        content: "Praias, passeios e experiências em Natal/RN, do seu jeito.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-sand-soft text-ink">
+      <Header />
+      <main>
+        <Hero />
+        <HowItWorks />
+        <PlacesPreview />
+        <FinalCTA />
+      </main>
+      <Footer />
+      <MobileStickyCTA />
     </div>
   );
 }
