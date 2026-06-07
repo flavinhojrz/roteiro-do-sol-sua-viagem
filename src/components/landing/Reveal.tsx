@@ -16,7 +16,7 @@ export function Reveal({
   return (
     <As
       ref={ref as never}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={shown && delay ? { transitionDelay: `${delay}ms` } : undefined}
       className={cn("reveal", shown && "is-visible", className)}
     >
       {children}
