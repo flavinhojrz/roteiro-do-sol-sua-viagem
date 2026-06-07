@@ -50,16 +50,27 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float 8s ease-in-out infinite;
   --animate-fade-up: fadeUp 0.7s ease-out both;
+  --animate-sun-pulse: sunPulse 6s ease-in-out infinite;
+  --animate-wave-drift: waveDrift 14s ease-in-out infinite;
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0)); }
+    50% { transform: translateY(-10px) rotate(var(--tw-rotate, 0)); }
   }
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes sunPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 0 transparent); }
+    50% { transform: scale(1.04) rotate(6deg); filter: drop-shadow(0 0 28px color-mix(in oklab, var(--sun) 55%, transparent)); }
+  }
+  @keyframes waveDrift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-14px); }
+  }
 }
+
 
 :root {
   --radius: 1rem;
