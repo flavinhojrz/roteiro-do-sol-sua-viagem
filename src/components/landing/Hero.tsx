@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import pontaNegra from "@/assets/places/ponta-negra.jpg";
 import genipabu from "@/assets/places/genipabu.jpg";
 import parqueDunas from "@/assets/places/parque-dunas.jpg";
@@ -62,13 +63,13 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col items-center md:items-start gap-3">
-            <a
-              href="#criar"
+            <Link
+              to="/onboarding"
               className="press group inline-flex items-center justify-center rounded-full bg-coral px-8 py-4 text-base md:text-lg font-bold text-white shadow-coral hover:shadow-coral-lg hover:-translate-y-0.5"
             >
               Criar meu roteiro
               <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-            </a>
+            </Link>
             <p className="text-sm text-ink/60">
               Leva menos de 2 minutos para começar ☀️
             </p>

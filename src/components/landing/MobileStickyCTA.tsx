@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 
 export function MobileStickyCTA() {
   const [show, setShow] = useState(false);
@@ -16,12 +17,12 @@ export function MobileStickyCTA() {
         show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
     >
-      <a
-        href="#criar"
+      <Link
+        to="/onboarding"
         className="press pointer-events-auto flex items-center justify-center rounded-full bg-coral px-6 py-4 text-base font-bold text-white shadow-coral-lg"
       >
         Criar meu roteiro ☀️
-      </a>
+      </Link>
     </div>
   );
 }
