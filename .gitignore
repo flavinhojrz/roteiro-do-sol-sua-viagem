@@ -9,6 +9,8 @@ lerna-debug.log*
 
 node_modules
 dist
+data/place-images/*
+!data/place-images/manifest.json
 dist-ssr
 .output
 .vinxi

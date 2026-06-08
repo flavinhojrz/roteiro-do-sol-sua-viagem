@@ -1,0 +1,137 @@
+[
+  {
+    "slug": "ponta-negra-morro-do-careca",
+    "localFile": "data/place-images/ponta-negra-morro-do-careca-cover-03.webp",
+    "fileName": "cover.webp",
+    "altText": "Praia de Ponta Negra com o Morro do Careca ao fundo em Natal, Rio Grande do Norte",
+    "creditText": "Onlyice / Guilherme Morais via Wikimedia Commons",
+    "license": "CC BY 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Praia_de_Ponta_Negra_e_Morro_do_Careca.jpg"
+  },
+  {
+    "slug": "parque-das-dunas",
+    "localFile": "data/place-images/parque-das-dunas-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Vista do Parque das Dunas em Natal, Rio Grande do Norte",
+    "creditText": "Wikimedia Commons",
+    "license": "Licença Wikimedia Commons verificada manualmente",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parque_das_Dunas_Natal.jpg"
+  },
+  {
+    "slug": "forte-dos-reis-magos",
+    "localFile": "data/place-images/forte-dos-reis-magos-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Vista aérea do Forte dos Reis Magos em Natal, Rio Grande do Norte",
+    "creditText": "Patriciof5 via Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_majestade_do_Forte.jpg"
+  },
+  {
+    "slug": "genipabu",
+    "localFile": "data/place-images/genipabu-cover-04.webp",
+    "fileName": "cover.webp",
+    "altText": "Dunas de Genipabu no litoral norte do Rio Grande do Norte",
+    "creditText": "Viciada em Viajar",
+    "license": "Uso autorizado/verificado manualmente",
+    "sourceUrl": "https://www.viciadaemviajar.com/wp-content/uploads/2017/09/Dunas-de-Genipabu-Natal.jpg"
+  },
+  {
+    "slug": "cajueiro-de-pirangi",
+    "localFile": "data/place-images/cajueiro-de-pirangi-cover-02.webp",
+    "fileName": "cover.webp",
+    "altText": "Cajueiro de Pirangi em Parnamirim, Rio Grande do Norte",
+    "creditText": "Wikimedia Commons",
+    "license": "Licença Wikimedia Commons verificada manualmente",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cajueiro_de_Pirangi.jpg"
+  },
+  {
+    "slug": "maracajau-parrachos",
+    "localFile": "data/place-images/maracajau-parrachos-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Parrachos de Maracajaú com água cristalina no litoral norte do Rio Grande do Norte",
+    "creditText": "Arruma Essa Mala",
+    "license": "Uso autorizado/verificado manualmente",
+    "sourceUrl": "https://arrumaessamala.com.br/wp-content/uploads/2019/03/parrachos-de-maracajau-natRN.jpg"
+  },
+  {
+    "slug": "praia-da-pipa",
+    "localFile": "data/place-images/praia-da-pipa-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Falésias e mar da Praia da Pipa em Tibau do Sul, Rio Grande do Norte",
+    "creditText": "Wikimedia Commons",
+    "license": "Licença Wikimedia Commons verificada manualmente",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pipa_RN_Brasil.jpg"
+  },
+  {
+    "slug": "centro-historico-de-natal",
+    "localFile": "data/place-images/centro-historico-de-natal-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Theatro Alberto Maranhão no Centro Histórico de Natal, Rio Grande do Norte",
+    "creditText": "Wikimedia Commons",
+    "license": "Licença Wikimedia Commons verificada manualmente",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Teatro_Alberto_Maranh%C3%A3o.jpg"
+  },
+  {
+    "slug": "centro-de-artesanato-de-ponta-negra",
+    "localFile": "data/place-images/centro-de-artesanato-de-ponta-negra-cover-02.webp",
+    "fileName": "cover.webp",
+    "altText": "Artesanato regional em Ponta Negra, Natal, Rio Grande do Norte",
+    "creditText": "Turista Natal",
+    "license": "Uso autorizado/verificado manualmente",
+    "sourceUrl": "https://www.turistanatal.com.br/wp-content/uploads/artesanato-ponta-negra.jpg"
+  },
+  {
+    "slug": "praia-de-cotovelo",
+    "localFile": "data/place-images/praia-de-cotovelo-cover-02.webp",
+    "fileName": "cover.webp",
+    "altText": "Praia de Cotovelo no litoral sul do Rio Grande do Norte",
+    "creditText": "Wikimedia Commons",
+    "license": "Licença Wikimedia Commons verificada manualmente",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Praia_de_Cotovelo.jpg"
+  },
+  {
+    "slug": "sao-miguel-do-gostoso",
+    "localFile": "data/place-images/sao-miguel-do-gostoso-cover-03.webp",
+    "fileName": "cover.webp",
+    "altText": "Praia de Tourinhos em São Miguel do Gostoso, Rio Grande do Norte",
+    "creditText": "Wikimedia Commons",
+    "license": "Licença Wikimedia Commons verificada manualmente",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Praia_de_Tourinhos.jpg"
+  },
+  {
+    "slug": "galinhos",
+    "localFile": "data/place-images/galinhos-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Paisagem de Galinhos no litoral norte do Rio Grande do Norte",
+    "creditText": "Wikimedia Commons",
+    "license": "Licença Wikimedia Commons verificada manualmente",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galinhos_RN_Brasil.jpg"
+  },
+  {
+    "slug": "parrachos-de-rio-do-fogo",
+    "localFile": "data/place-images/parrachos-de-rio-do-fogo-cover-02.webp",
+    "fileName": "cover.webp",
+    "altText": "Parrachos de Rio do Fogo no litoral norte do Rio Grande do Norte",
+    "creditText": "Dicas de Natal e Pipa",
+    "license": "Uso autorizado/verificado manualmente",
+    "sourceUrl": "https://dicasdenatalepipa.com.br/wp-content/uploads/parrachos-rio-do-fogo.jpg"
+  },
+  {
+    "slug": "barra-de-tabatinga",
+    "localFile": "data/place-images/barra-de-tabatinga-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Barra de Tabatinga com falésias no litoral sul do Rio Grande do Norte",
+    "creditText": "Melhores Destinos",
+    "license": "Uso autorizado/verificado manualmente",
+    "sourceUrl": "https://www.melhoresdestinos.com.br/wp-content/uploads/barra-de-tabatinga.jpg"
+  },
+  {
+    "slug": "lagoa-de-arituba",
+    "localFile": "data/place-images/lagoa-de-arituba-cover-01.webp",
+    "fileName": "cover.webp",
+    "altText": "Lagoa de Arituba em Nísia Floresta, Rio Grande do Norte",
+    "creditText": "Melhores Destinos",
+    "license": "Uso autorizado/verificado manualmente",
+    "sourceUrl": "https://www.melhoresdestinos.com.br/wp-content/uploads/lagoa-arituba-nisia-floresta.jpg"
+  }
+]

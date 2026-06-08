@@ -1,9 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { StepShell } from "@/components/onboarding/StepShell";
 import { ProgressBar } from "@/components/onboarding/ProgressBar";
 import { OptionCard } from "@/components/onboarding/OptionCard";
+import { PlaceCoverImage, PlaceCoverSkeleton } from "@/components/places/PlaceCoverImage";
 import {
   BUDGET_OPTIONS,
   COMPANY_OPTIONS,
@@ -15,6 +17,8 @@ import {
   type QuizAnswers,
 } from "@/components/onboarding/quiz-data";
 import { SunBurst, Waves } from "@/components/landing/SunWaveDecor";
+import { selectPlacePreviews } from "@/lib/places/previews";
+import { getPublishedPlaces, type PublishedPlace } from "@/lib/supabase/places";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/onboarding")({
@@ -90,7 +94,9 @@ function OnboardingPage() {
         }}
       />
     );
-  if (phase === "preparing") return <Preparing transition={transition} />;
+  if (phase === "preparing") {
+    return <Preparing transition={transition} selectedVibes={answers.vibes} />;
+  }
 
   return (
     <StepShell>
@@ -393,28 +399,30 @@ function Intro({ onStart }: { onStart: () => void }) {
   );
 }
 
-function Preparing({ transition }: { transition: ReturnType<typeof pickTransition> }) {
+function Preparing({
+  transition,
+  selectedVibes,
+}: {
+  transition: ReturnType<typeof pickTransition>;
+  selectedVibes: string[];
+}) {
+  const { data: places = [], isLoading } = useQuery({
+    queryKey: ["published-places"],
+    queryFn: getPublishedPlaces,
+  });
+  const previewPlaces = useMemo(
+    () => selectPlacePreviews(places, { selectedVibes, limit: 5 }),
+    [places, selectedVibes],
+  );
+
   return (
-    <div className="relative min-h-screen bg-gradient-sky overflow-hidden flex items-center justify-center px-5">
+    <div className="relative min-h-screen bg-gradient-sky overflow-hidden flex items-center justify-center px-5 py-10">
       <SunBurst className="pointer-events-none absolute -top-10 -right-10 w-80 h-80 md:w-[32rem] md:h-[32rem] opacity-60 animate-sun-pulse" />
       <SunBurst className="pointer-events-none absolute -bottom-24 -left-24 w-72 h-72 opacity-35 animate-sun-pulse" />
       <Waves className="pointer-events-none absolute bottom-0 left-0 w-[110%] h-28 md:h-36 animate-wave-drift" />
 
-      <div className="relative text-center max-w-xl">
-        <div className="flex justify-center gap-3 md:gap-4 mb-8">
-          {transition.emojis.map((e, i) => (
-            <div
-              key={i}
-              style={{
-                animationDelay: `${i * 0.18}s`,
-                animationDuration: "2.4s",
-              }}
-              className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white shadow-soft-lg flex items-center justify-center text-3xl md:text-4xl animate-float"
-            >
-              {e}
-            </div>
-          ))}
-        </div>
+      <div className="relative w-full max-w-3xl text-center">
+        <PreparingPreviewCards places={previewPlaces} isLoading={isLoading} />
 
         <h2 className="font-display font-extrabold text-2xl md:text-4xl text-ink leading-tight animate-fade-up">
           {transition.title}
@@ -426,10 +434,76 @@ function Preparing({ transition }: { transition: ReturnType<typeof pickTransitio
           Estamos separando lugares que combinam com sua viagem...
         </p>
 
+        <div
+          style={{ animationDelay: "0.38s" }}
+          className="mt-5 flex justify-center gap-2 animate-fade-up"
+          aria-hidden="true"
+        >
+          {transition.emojis.map((emoji) => (
+            <span
+              key={emoji}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/75 text-xl shadow-soft"
+            >
+              {emoji}
+            </span>
+          ))}
+        </div>
+
         <div className="mt-8 mx-auto w-56 h-1.5 rounded-full bg-white/70 overflow-hidden">
           <div className="h-full bg-gradient-sun animate-preparing-bar" />
         </div>
       </div>
+    </div>
+  );
+}
+
+function PreparingPreviewCards({
+  places,
+  isLoading,
+}: {
+  places: PublishedPlace[];
+  isLoading: boolean;
+}) {
+  const skeletons = Array.from({ length: 5 }, (_, index) => index);
+
+  return (
+    <div
+      className="mx-auto mb-8 grid max-w-2xl grid-cols-3 gap-3 sm:grid-cols-5 md:gap-4"
+      aria-live="polite"
+    >
+      {isLoading
+        ? skeletons.map((index) => (
+            <PlaceCoverSkeleton
+              key={index}
+              className={cn(
+                "h-28 rounded-3xl shadow-soft-lg md:h-36",
+                index >= 3 && "hidden sm:block",
+              )}
+            />
+          ))
+        : places.map((place, index) => (
+            <article
+              key={place.id}
+              style={{
+                animationDelay: `${index * 0.15}s`,
+                animationDuration: `${5.8 + index * 0.4}s`,
+              }}
+              className={cn(
+                "relative h-28 overflow-hidden rounded-3xl bg-white p-1 shadow-soft-lg animate-float md:h-36",
+                index >= 3 && "hidden sm:block",
+              )}
+            >
+              <PlaceCoverImage
+                src={place.coverImageUrl}
+                alt={`Imagem de ${place.name}`}
+                className="h-full w-full rounded-[1.25rem]"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+              <span className="absolute inset-x-2 bottom-2 rounded-full bg-ink/65 px-2 py-1 text-[0.62rem] font-extrabold leading-tight text-white backdrop-blur">
+                {place.name}
+              </span>
+            </article>
+          ))}
     </div>
   );
 }

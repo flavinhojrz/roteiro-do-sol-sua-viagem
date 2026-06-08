@@ -1,0 +1,818 @@
+[
+  {
+    "name": "Ponta Negra e Morro do Careca",
+    "slug": "ponta-negra-morro-do-careca",
+    "category": "beach",
+    "region": "Natal - Zona Sul",
+    "location_label": "Ponta Negra, Natal - RN",
+    "short_description": "A praia mais emblemática de Natal, com calçadão, barracas e o Morro do Careca ao fundo.",
+    "long_description": "Ponta Negra é a principal praia urbana de Natal e concentra boa parte da infraestrutura turística da cidade, com hotéis, bares, restaurantes e acesso fácil. No extremo sul fica o Morro do Careca, duna-símbolo de Natal com cerca de 120 metros de altura, e um dos cartões-postais mais reconhecíveis do Rio Grande do Norte.\n\nA orla passou por um grande projeto de engorda da faixa de areia concluído no final de 2025, que ampliou a faixa em até 100 metros na maré baixa e 50 metros na maré alta, ao longo de 4,6 km de extensão — uma revitalização importante que transformou a experiência da orla. O morro continua fechado à subida desde os anos 1990 para proteger a restinga.\n\nPara o MVP, é um lugar-chave porque junta praia, foto, passeio leve, comida e vida noturna em um único ponto. À noite, o bairro de Ponta Negra tem vida própria, com opções de música ao vivo, bares e a principal casa noturna da área.",
+    "best_time": "Amanhecer, fim de tarde e início da noite.",
+    "best_season": "Dezembro a março (alta temporada; clima mais quente e menos chuvas).",
+    "average_duration": "2h–4h",
+    "price_level": "free",
+    "approximate_price": "Praia pública gratuita; gastos variam com barracas, alimentação e passeios opcionais.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.8869,-35.1670",
+    "latitude": -5.8869,
+    "longitude": -35.167,
+    "distance_from_natal_km": 0,
+    "distance_from_airport_km": 40,
+    "is_inside_natal": true,
+    "is_day_trip": false,
+    "activities": [
+      "banho de mar",
+      "caminhada no calçadão",
+      "barracas de praia",
+      "vida noturna",
+      "gastronomia",
+      "fotos no Morro do Careca",
+      "passeio de jangada"
+    ],
+    "highlights": [
+      "Morro do Careca (120m) — cartão-postal mais reconhecível de Natal",
+      "Engorda da orla concluída em 2025 — faixa de areia ampliada em até 100m",
+      "Bairro com maior concentração de hotéis e restaurantes da cidade",
+      "Vida noturna ativa a poucos metros da areia"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["beaches", "photos", "sunset", "relax", "gastronomy", "romantic", "cheap"],
+    "mvp_relevance": "É o principal gatilho visual e emocional de Natal para onboarding e recomendação inicial.",
+    "image_candidates": [],
+    "image_note": "image needed — priorizar upload próprio ou arquivo livre do Wikimedia Commons antes de publicar.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Ponta_Negra_(Natal)",
+        "note": "Confirma localização do bairro/praia, importância turística e presença de centros de artesanato em Ponta Negra."
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/Morro_do_Careca",
+        "note": "Confirma o morro como símbolo turístico, sua posição em Ponta Negra e o fechamento à visitação para preservação."
+      },
+      {
+        "url": "https://marazulreceptivo.com.br/blog/praia-de-ponta-negra/",
+        "note": "Confirma engorda da praia concluída em 2025, com ampliação de até 100m na maré baixa ao longo de 4,6 km."
+      },
+      {
+        "url": "https://natalpraias.com.br/ponta-negra/",
+        "note": "Confirma extensão de 4,6 km e detalhes da revitalização de 2025."
+      }
+    ]
+  },
+  {
+    "name": "Parque das Dunas",
+    "slug": "parque-das-dunas",
+    "category": "nature",
+    "region": "Natal - Via Costeira / Tirol",
+    "location_label": "Parque das Dunas, Natal - RN",
+    "short_description": "Reserva urbana de Mata Atlântica e dunas fixas, ótima para trilhas leves e contato com natureza.",
+    "long_description": "O Parque das Dunas é a principal área verde protegida de Natal e um dos grandes diferenciais da cidade como destino urbano de natureza. A área preserva dunas fixas e remanescentes de Mata Atlântica em pleno tecido urbano, criada em 1977, funcionando como um contraponto à orla e à Via Costeira.\n\nPara o produto, ele é essencial porque amplia o repertório além de praia e pôr do sol. Serve muito bem a perfis de natureza, caminhada, descanso, observação e passeio de meio turno, inclusive para moradores ou visitantes com agenda curta.",
+    "best_time": "Manhã cedo ou fim da tarde.",
+    "best_season": "O ano inteiro; evitar o pico do calor entre 11h e 15h.",
+    "average_duration": "2h–3h",
+    "price_level": "cheap",
+    "approximate_price": "Ingresso e trilhas costumam ter cobrança simbólica; validar valor atual no parque antes de publicar.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.8255,-35.1914",
+    "latitude": -5.8255,
+    "longitude": -35.1914,
+    "distance_from_natal_km": 0,
+    "distance_from_airport_km": null,
+    "is_inside_natal": true,
+    "is_day_trip": false,
+    "activities": [
+      "trilhas ecológicas",
+      "observação de fauna e flora",
+      "caminhada",
+      "fotografia de natureza"
+    ],
+    "highlights": [
+      "Uma das maiores reservas de Mata Atlântica urbana do Brasil",
+      "Dunas fixas no meio da cidade",
+      "Trilhas acessíveis para diferentes níveis"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["nature", "relax", "cheap", "photos"],
+    "mvp_relevance": "Entrega uma rota de natureza dentro da cidade, útil para perfis que não querem só praia.",
+    "image_candidates": [],
+    "image_note": "image needed — ideal buscar foto livre do parque ou produzir acervo próprio.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Natal_(Rio_Grande_do_Norte)",
+        "note": "Confirma o parque como unidade de conservação criada em 1977, área aproximada e relevância ambiental em Natal."
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/Turismo_em_Natal_(Rio_Grande_do_Norte)",
+        "note": "Confirma o parque como uma das atrações turísticas mais conhecidas da capital."
+      }
+    ]
+  },
+  {
+    "name": "Forte dos Reis Magos",
+    "slug": "forte-dos-reis-magos",
+    "category": "history",
+    "region": "Natal - Santos Reis",
+    "location_label": "Praia do Forte / Santos Reis, Natal - RN",
+    "short_description": "Fortaleza histórica na foz do Potengi, marco inicial da cidade e ícone do turismo cultural de Natal.",
+    "long_description": "O Forte dos Reis Magos é a edificação histórica mais emblemática de Natal e está diretamente ligado ao surgimento da cidade. Sua construção começou em 1598 e o forte é tratado como marco inicial do núcleo urbano, na barra do rio Potengi, próximo à atual Ponte Newton Navarro.\n\nPara o MVP, ele é indispensável porque ancora a dimensão de história e cultura. Funciona muito bem tanto como atração principal quanto como complemento de um roteiro de Centro Histórico, pôr do sol no Potengi ou Praia do Forte.",
+    "best_time": "Manhã ou fim da tarde; luz boa para fotos e calor mais ameno.",
+    "best_season": "O ano inteiro.",
+    "average_duration": "1h–2h",
+    "price_level": "cheap",
+    "approximate_price": "Há cobrança de entrada em alguns períodos; validar bilheteria e gratuidades no dia da publicação.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.756354,-35.194874",
+    "latitude": -5.756354,
+    "longitude": -35.194874,
+    "distance_from_natal_km": 0,
+    "distance_from_airport_km": null,
+    "is_inside_natal": true,
+    "is_day_trip": false,
+    "activities": [
+      "visita histórica",
+      "fotografia",
+      "contemplação do Rio Potengi",
+      "roteiro combinado com Centro Histórico"
+    ],
+    "highlights": [
+      "Construção iniciada em 1598 — marco fundador de Natal",
+      "Vista para a foz do Rio Potengi e Ponte Newton Navarro",
+      "Planta em estrela típica da arquitetura militar portuguesa"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["history_culture", "photos", "romantic", "cheap"],
+    "mvp_relevance": "É o principal ativo de história da cidade e ajuda a montar roteiros além do eixo sol e praia.",
+    "image_candidates": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:A_majestade_do_Forte.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Patriciof5 / Wikimedia Commons",
+        "note": "Arquivo livre para referência e possível ingestão manual no acervo."
+      }
+    ],
+    "image_note": "",
+    "sources": [
+      {
+        "url": "https://www.gov.br/turismo/pt-br/assuntos/noticias/e-natal-em-natal-em-ritmo-de-veraoc-a-cidade-comemora-416-anos",
+        "note": "Confirma o forte como principal atrativo histórico de Natal e seu vínculo com a fundação da cidade."
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/Forte_dos_Reis_Magos",
+        "note": "Confirma cronologia básica, localização, administração pública e coordenadas do monumento."
+      }
+    ]
+  },
+  {
+    "name": "Genipabu",
+    "slug": "genipabu",
+    "category": "day_trip",
+    "region": "Litoral Norte - Extremoz",
+    "location_label": "Genipabu, Extremoz - RN",
+    "short_description": "Complexo de dunas, lagoa e praia ao norte de Natal, famoso por buggy, paisagem móvel e esquibunda.",
+    "long_description": "Genipabu reúne praia, lagoa, dunas e área protegida em um dos cenários mais clássicos do litoral potiguar. O nome vem do tupi 'jenipa-bu', que significa 'onde se encontra o jenipapo'. A paisagem é marcada por dunas móveis, forte apelo visual e uma ampla oferta de atividades.\n\nO passeio longo de buggy tem duração de aproximadamente 8 horas e inclui visita à Praia da Redinha (com aquário/zoológico de mais de 60 espécies), dunas, lagoa e outras praias do litoral norte, com travessia do Rio Ceará-Mirim de balsa — uma parte inesquecível do roteiro. O passeio curto dura cerca de 2h30. Na Lagoa de Genipabu há esquibunda (deslizar em prancha de madeira pelas dunas até a lagoa), aerobunda (cabo de aço), pedalinho e caiaque. As dunas também serviram de cenário para novelas globais como 'Flor do Caribe' e 'Cambalacho'.\n\nPara o MVP, é um day trip praticamente obrigatório porque conversa com perfis de aventura, fotos, natureza e família.",
+    "best_time": "Manhã cedo ou fim da tarde; evitar o pico do sol.",
+    "best_season": "O ano inteiro; evitar feriados e alta temporada sem reserva prévia.",
+    "average_duration": "3h–8h (curto ou longo)",
+    "price_level": "cheap",
+    "approximate_price": "Acesso à praia é gratuito; buggy e demais atividades são cobrados à parte e variam por operador. O buggeiro divide o custo entre até 4 passageiros.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.6990,-35.2015",
+    "latitude": -5.699,
+    "longitude": -35.2015,
+    "distance_from_natal_km": 20,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "buggy com emoção",
+      "buggy sem emoção",
+      "esquibunda na lagoa",
+      "aerobunda na lagoa",
+      "passeio de dromedário",
+      "pedalinho",
+      "caiaque",
+      "jangada na praia",
+      "jet ski",
+      "banho na lagoa",
+      "banho de mar"
+    ],
+    "highlights": [
+      "Dunas móveis — cenário de novelas globais (Flor do Caribe, Cambalacho)",
+      "Travessia do Rio Ceará-Mirim de balsa (passeio longo)",
+      "Esquibunda: descida de duna em prancha com queda na lagoa",
+      "Passeio de dromedário — atração inusitada no litoral nordestino"
+    ],
+    "logistic_notes": "Buggeiros são credenciados pela SETUR. O custo total do veículo é dividido entre até 4 turistas. Reservar com agência credenciada evita problemas com veículos em mal estado.",
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["adventure", "photos", "nature", "beaches", "day_trips"],
+    "mvp_relevance": "É o bate-volta mais instantaneamente associado a aventura perto de Natal.",
+    "image_candidates": [],
+    "image_note": "image needed — buscar arquivo livre do Wikimedia Commons ou produzir foto própria.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Parque_Tur%C3%ADstico_Ecol%C3%B3gico_Dunas_de_Genipabu",
+        "note": "Confirma o complexo de praia, dunas, lagoa, distância aproximada de Natal e vocação turística."
+      },
+      {
+        "url": "https://www.viciadaemviajar.com/passeio-de-buggy-em-genipabu/",
+        "note": "Confirma distância (20km/30min), origem do nome tupi e detalhes do passeio curto e longo."
+      },
+      {
+        "url": "https://dicasdenatalepipa.com.br/natal/dunas-de-genipabu/",
+        "note": "Confirma atividades disponíveis: esquibunda, aerobunda, dromedário, pedalinho, caiaque, jangada e jet ski."
+      },
+      {
+        "url": "https://classeturista.com/pt/brasil/natal/passeio-buggy-litoral-norte-de-natal/",
+        "note": "Confirma a travessia de balsa no Rio Ceará-Mirim como parte do passeio longo."
+      }
+    ]
+  },
+  {
+    "name": "Cajueiro de Pirangi",
+    "slug": "cajueiro-de-pirangi",
+    "category": "nature",
+    "region": "Litoral Sul - Parnamirim",
+    "location_label": "Pirangi do Norte, Parnamirim - RN",
+    "short_description": "Árvore monumental em Pirangi do Norte, tradicionalmente divulgada como o maior cajueiro do mundo.",
+    "long_description": "O Cajueiro de Pirangi é um dos atrativos mais conhecidos do litoral sul metropolitano. A árvore se notabilizou pelo tamanho excepcional da copa e pela forma de crescimento horizontal, que levou o local a se consolidar como parada turística clássica de quem desce a Rota do Sul.\n\nNo MVP, ele é muito útil como parada curta de meia jornada. Encaixa bem com perfis de fotos, família, curiosidade local e day trip combinado com Cotovelo, Pirangi e Tabatinga.",
+    "best_time": "Manhã ou fim da tarde.",
+    "best_season": "O ano inteiro.",
+    "average_duration": "1h–2h",
+    "price_level": "cheap",
+    "approximate_price": "Visita costuma ter cobrança de ingresso/estrutura turística; confirmar valor atual antes de publicar.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.9772,-35.1498",
+    "latitude": -5.9772,
+    "longitude": -35.1498,
+    "distance_from_natal_km": 25,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "visita à estrutura turística",
+      "fotografia",
+      "compra de caju e derivados"
+    ],
+    "highlights": [
+      "Copa com mais de 8.000 m² — maior cajueiro do mundo segundo registros locais",
+      "Crescimento horizontal único — parece uma floresta, mas é uma árvore só",
+      "Boa parada de rota combinada com Cotovelo e Tabatinga"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["photos", "nature", "day_trips", "cheap"],
+    "mvp_relevance": "É uma parada rápida, muito conhecida e perfeita para enriquecer roteiros de litoral sul.",
+    "image_candidates": [],
+    "image_note": "image needed — localizar arquivo livre específico do atrativo antes do upload.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Cajueiro_de_Pirangi",
+        "note": "Confirma localização em Pirangi do Norte, dimensão aproximada e narrativa histórica do atrativo."
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/Polo_Costa_das_Dunas",
+        "note": "Confirma o maior cajueiro do mundo como destaque regional do Costa das Dunas."
+      }
+    ]
+  },
+  {
+    "name": "Maracajaú e Parrachos",
+    "slug": "maracajau-parrachos",
+    "category": "day_trip",
+    "region": "Litoral Norte - Maxaranguape",
+    "location_label": "Maracajaú, Maxaranguape - RN",
+    "short_description": "Praia e recifes a cerca de 65 km de Natal, conhecidos por piscinas naturais em alto mar e mergulho.",
+    "long_description": "Maracajaú é uma comunidade litorânea do município de Maxaranguape cuja grande fama turística vem dos parrachos — formações recifais a 8 km da costa que, na maré baixa, criam piscinas naturais em alto mar com água cristalina. Diferentemente dos Parrachos do Rio do Fogo, os de Maracajaú não têm pé, tornando-os ideais para mergulho real.\n\nO passeio de catamarã (ou lancha) inclui máscara, snorkel, colete flutuador e uma plataforma flutuante de dois andares com bar, petiscos e toboágua. O tempo de permanência na plataforma é de 1h30 a 2h. O embarque é molhado e a água pode chegar até a cintura. O horário depende exclusivamente da maré baixa, divulgado no voucher após a reserva.\n\nPara o MVP, é um excelente item de personalização para quem marca mar, aventura e fotos. Diferencia o catálogo porque introduz um tipo de experiência aquática distinta das praias urbanas.",
+    "best_time": "Manhã, conforme a maré baixa do dia.",
+    "best_season": "O ano inteiro, mas verificar condições de vento e mar no período chuvoso (fev–mai).",
+    "average_duration": "6h–8h (contando deslocamento, passeio e estrutura de praia)",
+    "price_level": "medium",
+    "approximate_price": "Catamarã + mergulho livre: ~R$ 110–184 por pessoa. Com mergulho de cilindro (batismo): ~R$ 250–330. Transfer incluso em alguns pacotes. Confirmar valores vigentes na operadora.",
+    "tide_dependency": true,
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.3998,-35.2517",
+    "latitude": -5.3998,
+    "longitude": -35.2517,
+    "distance_from_natal_km": 65,
+    "distance_from_coast_km": 8,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "snorkel",
+      "mergulho de cilindro (batismo com instrutor)",
+      "plataforma flutuante",
+      "catamarã ou lancha",
+      "quadriciclo na praia",
+      "bar e restaurante no Parrachos Praia Clube",
+      "fotografia subaquática"
+    ],
+    "highlights": [
+      "Piscina natural em alto mar — água que parece azul cristal",
+      "Mergulho de cilindro disponível para iniciantes com instrutor",
+      "Plataforma flutuante de 2 andares com bar e toboágua",
+      "Snorkel e colete inclusos no passeio base"
+    ],
+    "logistic_notes": "Reservar com antecedência — horário depende da maré. Embarque molhado (água até a cintura). Leve apenas o essencial; armários com chave disponíveis. Idade mínima recomendada: 2 anos. Principais operadoras: Parrachos Praia Clube, Maracajaú Diver.",
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["adventure", "photos", "nature", "day_trips", "beaches", "romantic"],
+    "mvp_relevance": "Entrega a experiência de recifes e mar cristalino que muitos visitantes procuram no RN.",
+    "image_candidates": [],
+    "image_note": "image needed — priorizar imagem própria ou livre com foco nos parrachos e não só na praia.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Parrachos_de_Maracaja%C3%BA",
+        "note": "Confirma localização dos parrachos, inserção na APA dos Recifes de Corais e vocação para mergulho."
+      },
+      {
+        "url": "https://arrumaessamala.com.br/parrachos-de-maracajau/",
+        "note": "Confirma distância (65km/1h), localização dos parrachos a 8km da costa e que não têm pé (ideal para mergulho)."
+      },
+      {
+        "url": "https://reservasrn.parrachos.com.br/passeio/catamara-mergulho-livre-em-maracajau",
+        "note": "Confirma inclusões do passeio (máscara, snorkel, colete, plataforma flutuante, toboágua) e idade mínima de 2 anos."
+      },
+      {
+        "url": "https://www.viciadaemviajar.com/parrachos-de-maracajau/",
+        "note": "Confirma faixas de preço por operadora: R$ 110–330 dependendo do pacote (snorkel, cilindro, transfer, fotos)."
+      }
+    ]
+  },
+  {
+    "name": "Praia da Pipa",
+    "slug": "praia-da-pipa",
+    "category": "day_trip",
+    "region": "Litoral Sul - Tibau do Sul",
+    "location_label": "Pipa, Tibau do Sul - RN",
+    "short_description": "Balneário mais famoso do litoral sul potiguar, com falésias, praias diversas, surf e golfinhos rotadores.",
+    "long_description": "Pipa não é uma praia — são várias. O município de Tibau do Sul abriga um conjunto de praias e paisagens: Praia do Centro (a mais estruturada, com bares e restaurantes), Praia do Amor (formato de coração visto do alto, ondas ideais para surf), Baía dos Golfinhos (onde os golfinhos rotadores aparecem com frequência especialmente de manhã, acesso somente pela maré baixa), Praia do Madeiro (quieta, águas calmas), Cacimbinhas e Lagoa de Guaraíras.\n\nAs embarcações para observação de golfinhos partem entre 10h e 11h da manhã, com passeio de cerca de 1 hora. A costa entre Tibau do Sul e Pipa permite percursos de barco de aproximadamente 10 km. O Chapadão e o Santuário Ecológico são pontos de visitação com trilhas e vistas altas sobre as falésias.\n\nNo MVP, Pipa atende múltiplas motivações ao mesmo tempo: casal, aventura, fotos, gastronomia e day trip premium. É o tipo de destino que o usuário já espera encontrar quando pensa em viajar por Natal e arredores.",
+    "best_time": "Manhã para praia e golfinhos; fim de tarde para mirantes e Chapadão.",
+    "best_season": "Setembro a março (melhor época segundo operadoras locais).",
+    "average_duration": "8h–12h",
+    "price_level": "medium",
+    "approximate_price": "Praias são públicas; custo principal fica em deslocamento (~85km de Natal), alimentação, estacionamento e passeios de barco (~R$ 60–120/pessoa).",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-6.2289,-35.0517",
+    "latitude": -6.2289,
+    "longitude": -35.0517,
+    "distance_from_natal_km": 85,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "sub_beaches": [
+      "Praia do Centro (infraestrutura completa)",
+      "Praia do Amor (surf, formato de coração)",
+      "Baía dos Golfinhos (golfinhos rotadores — acesso na maré baixa)",
+      "Praia do Madeiro (tranquila, águas calmas)",
+      "Cacimbinhas (preservada, falésias coloridas)",
+      "Lagoa de Guaraíras (canoagem, navegação)"
+    ],
+    "activities": [
+      "surf",
+      "kitesurf",
+      "caiaque",
+      "stand-up paddle",
+      "passeio de barco com golfinhos",
+      "trilhas no Santuário Ecológico",
+      "buggy e quadriciclo pelo litoral",
+      "observação de tartarugas-marinhas",
+      "navegação na Lagoa de Guaraíras"
+    ],
+    "highlights": [
+      "Golfinhos rotadores na Baía dos Golfinhos — especialmente de manhã cedo",
+      "Praia do Amor — coração visto do alto da falésia",
+      "Chapadão e Santuário Ecológico com trilhas e vistas panorâmicas",
+      "Gastronomia diversa: da culinária regional a pratos autorais"
+    ],
+    "logistic_notes": "Passeio de barco com golfinhos sai às 10h–11h; reserve com antecedência na alta temporada. Baía dos Golfinhos só acessível na maré baixa. Estacionamento pode ser pago na vila.",
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["beaches", "photos", "romantic", "gastronomy", "adventure", "day_trips", "sunset"],
+    "mvp_relevance": "É o destino de litoral sul mais conhecido e amplia muito o apelo do catálogo personalizado.",
+    "image_candidates": [],
+    "image_note": "image needed — ideal selecionar imagem livre envolvendo falésias ou vista do centro de Pipa.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Praia_de_Pipa",
+        "note": "Confirma distância de Natal, conjunto de praias, golfinhos, proteção ambiental e falésias/chapadão."
+      },
+      {
+        "url": "https://tibaudosul.rn.gov.br/o-municipio/turismo-e-lazer/",
+        "note": "Confirma a Praia da Pipa como principal destino turístico do município e diversidade de praias."
+      },
+      {
+        "url": "https://tudosobrepraias.com/praia-da-pipa-em-tibau-do-sul-rn/",
+        "note": "Confirma distância de 85km de Natal, melhor época set–mar, e detalhes de cada praia e acesso."
+      },
+      {
+        "url": "https://www.viagensecaminhos.com/praia-do-pipa-e-tibau-do-sul-rn/",
+        "note": "Confirma passeio de barco com golfinhos (1h, saída 10h–11h) e extensão costeira de ~10km navegáveis."
+      }
+    ]
+  },
+  {
+    "name": "Centro Histórico de Natal",
+    "slug": "centro-historico-de-natal",
+    "category": "culture",
+    "region": "Natal - Cidade Alta e Ribeira",
+    "location_label": "Cidade Alta / Ribeira, Natal - RN",
+    "short_description": "Núcleo histórico com ruas antigas, igrejas, edifícios públicos, teatro e memória da formação da cidade.",
+    "long_description": "O Centro Histórico de Natal reúne uma área delimitada formada principalmente por Cidade Alta e Ribeira, com imóveis de estilos colonial, neoclássico, art déco e modernista. Ali se concentram igrejas, edifícios cívicos, o Theatro Alberto Maranhão, a Rua Chile e marcos fundamentais da memória urbana da capital.\n\nPara o MVP, esse item é essencial para perfis de cultura, caminhada, fotografia urbana e história. Também é um ótimo lugar para recomendações contextualizadas, porque permite conectar atrações entre si em sequência curta, incluindo o Forte dos Reis Magos como extensão natural.",
+    "best_time": "Manhã ou fim de tarde; programações culturais podem estender o passeio à noite.",
+    "best_season": "O ano inteiro; verificar programação cultural do Theatro Alberto Maranhão.",
+    "average_duration": "2h–4h",
+    "price_level": "free",
+    "approximate_price": "Circulação em espaço público é gratuita; alguns equipamentos internos podem ter ingresso próprio.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.7878,-35.2089",
+    "latitude": -5.7878,
+    "longitude": -35.2089,
+    "distance_from_natal_km": 0,
+    "distance_from_airport_km": null,
+    "is_inside_natal": true,
+    "is_day_trip": false,
+    "activities": [
+      "caminhada histórica",
+      "fotografia de arquitetura",
+      "visita ao Theatro Alberto Maranhão",
+      "roteiro pela Rua Chile",
+      "gastronomia local",
+      "visita a igrejas históricas"
+    ],
+    "highlights": [
+      "Theatro Alberto Maranhão — um dos teatros mais antigos do Nordeste (1904)",
+      "Arquitetura eclética: colonial, neoclássico, art déco e modernista",
+      "Ribeira: bairro de história com vista para o Rio Potengi",
+      "Combina facilmente com o Forte dos Reis Magos"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["history_culture", "photos", "cheap", "gastronomy"],
+    "mvp_relevance": "É o melhor cluster de patrimônio e cultura para contrabalançar o eixo sol e praia.",
+    "image_candidates": [],
+    "image_note": "image needed — buscar foto panorâmica livre de Ribeira/Cidade Alta ou produzir acervo próprio.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Centro_Hist%C3%B3rico_de_Natal",
+        "note": "Confirma delimitação do centro histórico, os bairros que o compõem e exemplos de imóveis/monumentos."
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/Natal_(Rio_Grande_do_Norte)",
+        "note": "Confirma o centro histórico como patrimônio cultural e um dos principais pontos turísticos da cidade."
+      }
+    ]
+  },
+  {
+    "name": "Centro de Artesanato de Ponta Negra",
+    "slug": "centro-de-artesanato-de-ponta-negra",
+    "category": "craft",
+    "region": "Natal - Ponta Negra",
+    "location_label": "Avenida Engenheiro Roberto Freire, Ponta Negra, Natal - RN",
+    "short_description": "Parada de compras e cultura local para quem busca bordados, renda, lembranças e artesanato potiguar.",
+    "long_description": "Ponta Negra concentra parte importante da oferta de artesanato de Natal, com centros e espaços tradicionais voltados à venda de peças regionais, bordados, redes, tapeçarias, roupas de praia e lembranças. Na lógica do visitante, funciona como ponto de consumo cultural e de presenteável, não apenas de compras.\n\nNo MVP, esse lugar é muito útil para perfis de cultura leve, artesanato e gastronomia de entorno. Ele também ajuda o catálogo a contemplar momentos de pausa entre praia e passeio, o que melhora a percepção de completude do roteiro.",
+    "best_time": "Fim de tarde e noite.",
+    "best_season": "O ano inteiro; movimento maior na alta temporada (dez–mar).",
+    "average_duration": "1h–2h",
+    "price_level": "cheap",
+    "approximate_price": "Entrada livre; custo depende das compras realizadas.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.8733,-35.1776",
+    "latitude": -5.8733,
+    "longitude": -35.1776,
+    "distance_from_natal_km": 0,
+    "distance_from_airport_km": null,
+    "is_inside_natal": true,
+    "is_day_trip": false,
+    "activities": [
+      "compras de artesanato regional",
+      "bordados e rendas potiguares",
+      "redes e tapeçarias",
+      "lembranças e souvenirs"
+    ],
+    "highlights": [
+      "Ponto de encontro do artesanato do RN numa área só",
+      "Proximidade com a praia e a orla de Ponta Negra",
+      "Fácil de combinar com passeio noturno no bairro"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["crafts", "cheap", "history_culture", "gastronomy"],
+    "mvp_relevance": "Inclui a camada de compras e cultura local, importante para roteiros reais e não só contemplativos.",
+    "image_candidates": [],
+    "image_note": "image needed — ideal produzir foto própria ou validar foto livre do espaço exato.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Ponta_Negra_(Natal)",
+        "note": "Confirma a relevância do artesanato em Ponta Negra e cita o Centro de Artesanato e o Vilarte."
+      }
+    ]
+  },
+  {
+    "name": "Praia de Cotovelo",
+    "slug": "praia-de-cotovelo",
+    "category": "beach",
+    "region": "Litoral Sul - Parnamirim",
+    "location_label": "Cotovelo, Parnamirim - RN",
+    "short_description": "Praia de falésias avermelhadas e atmosfera mais tranquila, logo ao sul de Natal.",
+    "long_description": "Cotovelo é uma parada clássica do litoral sul metropolitano e se destaca pelas falésias e pela sensação de praia mais tranquila em comparação com a orla urbana de Natal. A paisagem costeira é o maior ativo, com boa vocação para banho, caminhada e contemplação.\n\nPara o MVP, Cotovelo funciona muito bem como alternativa para quem quer praia sem a intensidade de Ponta Negra. Também é ótimo em combinação com Pirangi e Cajueiro, enriquecendo roteiros curtos na Rota do Sol.",
+    "best_time": "Manhã ou fim de tarde.",
+    "best_season": "O ano inteiro.",
+    "average_duration": "2h–4h",
+    "price_level": "free",
+    "approximate_price": "Praia pública gratuita; consumo em barracas e deslocamento à parte.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.9658,-35.1437",
+    "latitude": -5.9658,
+    "longitude": -35.1437,
+    "distance_from_natal_km": 18,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "banho de mar",
+      "caminhada nas falésias",
+      "fotografia da paisagem",
+      "barracas de praia"
+    ],
+    "highlights": [
+      "Falésias avermelhadas — paisagem distinta das praias planas da capital",
+      "Atmosfera tranquila — boa alternativa a Ponta Negra",
+      "Rota natural com Pirangi e Cajueiro de Pirangi"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["beaches", "relax", "photos", "cheap", "romantic"],
+    "mvp_relevance": "É uma excelente recomendação para perfis de descanso e praia menos congestionada.",
+    "image_candidates": [],
+    "image_note": "image needed — buscar foto livre com destaque para as falésias.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Praia_de_Cotovelo",
+        "note": "Confirma a praia em Parnamirim e destaca o valor paisagístico local."
+      }
+    ]
+  },
+  {
+    "name": "São Miguel do Gostoso",
+    "slug": "sao-miguel-do-gostoso",
+    "category": "day_trip",
+    "region": "Litoral Norte - São Miguel do Gostoso",
+    "location_label": "São Miguel do Gostoso - RN",
+    "short_description": "Destino de vento, mar e pôr do sol, com kitesurf de nível mundial, atmosfera de vila e gastronomia premium.",
+    "long_description": "São Miguel do Gostoso se consolidou como um dos principais destinos turísticos do litoral potiguar, com vocação forte para esportes de vento. Localizado na 'esquina do continente', o município tem condições de vento únicas que atraem kitesurfistas do Brasil e do mundo durante os 7 meses de alta temporada (agosto a fevereiro), com pico em outubro–dezembro.\n\nAs praias têm perfis distintos: Santo Cristo (melhor para kitesurf e windsurf, com várias escolinhas), Cardeiro (kite + lagoa que transborda em junho/julho), Xêpa (a mais central, com restaurantes e bares na Rua da Xêpa e na Av. Enseada das Baleias), e Tourinhos (a 7km do centro, com dunas petrificadas, formações rochosas em formato de touros e o pôr do sol mais famoso da região). O passeio de 'jardineira' até Tourinhos é feito diariamente e inclui paradas fotográficas na Lagoa do Cardeiro.\n\nNo MVP, Gostoso é valioso para nichos muito claros: casais, kitesurf, pôr do sol e gastronomia sofisticada.",
+    "best_time": "Fim de tarde para o pôr do sol em Tourinhos; manhã para kitesurf.",
+    "best_season": "Agosto a fevereiro (alta temporada de vento); outubro a dezembro é o pico.",
+    "average_duration": "Dia inteiro ou 1–2 pernoites",
+    "price_level": "medium",
+    "approximate_price": "Praias públicas gratuitas; custo principal fica em deslocamento (~120km de Natal), refeições e hospedagem opcional. Aulas de kitesurf: ~R$ 500 por aula de 2h (pacote de 10 aulas recomendado para iniciantes).",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.125,-35.638889",
+    "latitude": -5.125,
+    "longitude": -35.638889,
+    "distance_from_natal_km": 120,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "wind_season": "Agosto a fevereiro (7 meses); pico outubro–dezembro.",
+    "sub_beaches": [
+      "Santo Cristo (kitesurf e windsurf — principal spot)",
+      "Cardeiro (kite + lagoa de água doce adjacente)",
+      "Xêpa (restaurantes, bares, vida da vila)",
+      "Maceió (clubes de praia)",
+      "Tourinhos (dunas petrificadas, sunset, formações rochosas)"
+    ],
+    "activities": [
+      "kitesurf",
+      "windsurf",
+      "stand-up paddle",
+      "passeio de jardineira até Tourinhos",
+      "quadriciclo pelo litoral",
+      "gastronomia na Rua da Xêpa",
+      "observação de pôr do sol nas dunas de Tourinhos",
+      "banho na Lagoa do Cardeiro"
+    ],
+    "highlights": [
+      "Kitespot de nível mundial — um dos melhores do Brasil",
+      "Pôr do sol em Tourinhos — dunas petrificadas e formações rochosas únicas",
+      "Vila de pescadores com gastronomia cosmopolita",
+      "Lagoa do Cardeiro junta ao mar em junho/julho — fenômeno visual único"
+    ],
+    "logistic_notes": "O passeio de jardineira até Tourinhos sai por volta das 13h. Alugar carro é recomendado para explorar as praias com liberdade. Escolinhas de kitesurf nas praias do Cardeiro e Santo Cristo.",
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["beaches", "sunset", "relax", "adventure", "gastronomy", "romantic", "day_trips"],
+    "mvp_relevance": "É um destino aspiracional e muito alinhado a perfis de viagem com identidade própria.",
+    "image_candidates": [],
+    "image_note": "image needed — ideal obter arquivo livre de Tourinhos ou da vila.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/S%C3%A3o_Miguel_do_Gostoso",
+        "note": "Confirma perfil turístico, vocação para esportes e dados geográficos básicos."
+      },
+      {
+        "url": "https://www.folhape.com.br/colunistas/folha-turismo/sao-miguel-de-gostoso-rn-como-ir-e-o-que-fazer/34473/",
+        "note": "Confirma temporada de vento de 7 meses (ago–fev), Praia de Tourinhos a 7km e o passeio de jardineira."
+      },
+      {
+        "url": "https://www.cvc.com.br/dicas-de-viagem/inspiracoes/praia/conheca-o-paraiso-chamado-sao-miguel-do-gostoso/",
+        "note": "Confirma roteiro completo: kitesurf, clubes, quadriciclo, sunset em Tourinhos e jantar na Rua da Xêpa."
+      },
+      {
+        "url": "https://viajantecomum.com/o-que-fazer-em-sao-miguel-do-gostoso/",
+        "note": "Confirma Lagoa do Cardeiro transbordando em jun/jul e perfil de cada praia."
+      },
+      {
+        "url": "https://www.pousadavilladiluna.com.br/destino-em-sao-miguel-do-gostoso",
+        "note": "Confirma Tourinhos com dunas petrificadas e formações rochosas em forma de touros."
+      }
+    ]
+  },
+  {
+    "name": "Galinhos",
+    "slug": "galinhos",
+    "category": "day_trip",
+    "region": "Litoral Norte - Península de Galinhos",
+    "location_label": "Galinhos - RN",
+    "short_description": "Península cercada por dunas, salinas, mangue e praia, com sensação de destino isolado e fotogênico.",
+    "long_description": "Galinhos fica em uma península do litoral norte e é conhecida pela combinação rara de praias, dunas, manguezais, salinas e ritmo muito tranquilo. O destino é menos urbano e mais contemplativo, o que o torna uma boa vitrine de paisagens diferentes do entorno de Natal. O Farol de Galinhos é um dos ícones visuais da região.\n\nPara o MVP, Galinhos é importante porque representa o tipo de 'joia mais remota' que agrega valor à personalização. É especialmente forte para perfis de fotos, romance, natureza e viagens mais fora do óbvio.",
+    "best_time": "Dia inteiro, com destaque para o entardecer.",
+    "best_season": "Preferencialmente fora da estação chuvosa (evitar fev–mai); acesso pode ser afetado por chuvas.",
+    "average_duration": "Dia inteiro ou 1 pernoite",
+    "price_level": "medium",
+    "approximate_price": "Praias e circulação local são de baixo custo; deslocamento e logística elevam o gasto total. Verificar opções de travessia de balsa dependendo do período.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.0933,-36.2760",
+    "latitude": -5.0933,
+    "longitude": -36.276,
+    "distance_from_natal_km": 190,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "contemplação da paisagem",
+      "fotografia de dunas e salinas",
+      "visita ao Farol de Galinhos",
+      "canoagem no mangue",
+      "banho de mar"
+    ],
+    "highlights": [
+      "Farol de Galinhos — ícone visual da península",
+      "Combinação única: praia + dunas + salinas + manguezal",
+      "Sensação de isolamento e destino 'fora do óbvio'",
+      "Pôr do sol com vista privilegiada da península"
+    ],
+    "logistic_notes": "Destino mais distante — avaliar pernoite para melhor aproveitamento. Acesso pode exigir travessia ou estrada de areia dependendo da época.",
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["photos", "nature", "romantic", "relax", "day_trips", "sunset"],
+    "mvp_relevance": "Amplia o catálogo com um destino de forte apelo visual e sensação de descoberta.",
+    "image_candidates": [],
+    "image_note": "image needed — procurar imagem livre da península ou do farol em contexto paisagístico.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Galinhos",
+        "note": "Confirma localização na península, distância de Natal e presença de dunas, salinas, manguezais e praias."
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/Farol_de_Galinhos",
+        "note": "Complementa a relevância turística do farol, um dos ícones visuais da região."
+      }
+    ]
+  },
+  {
+    "name": "Parrachos de Rio do Fogo",
+    "slug": "parrachos-de-rio-do-fogo",
+    "category": "day_trip",
+    "region": "Litoral Norte - Rio do Fogo",
+    "location_label": "Rio do Fogo - RN",
+    "short_description": "Passeio de recifes rasos ao norte de Natal — piscinas naturais com pé, perfeitas para famílias e iniciantes.",
+    "long_description": "Rio do Fogo integra a faixa litorânea protegida pela APA dos Recifes de Corais, o mesmo macrocontexto ambiental dos Parrachos de Maracajaú. A diferença fundamental: os parrachos de Rio do Fogo são mais rasos e têm pé — o que os torna mais acessíveis para quem não sabe nadar ou quer uma experiência mais tranquila com crianças. O passeio é embarcado com snorkel em piscinas naturais.\n\nPara o MVP, esse item cria uma alternativa complementar a Maracajaú dentro do cluster de recifes. É especialmente bom para perfis de família e iniciantes em snorkel.",
+    "best_time": "Manhã, conforme maré baixa e saída dos passeios.",
+    "best_season": "O ano inteiro; condições melhores fora da estação chuvosa.",
+    "average_duration": "4h–6h",
+    "price_level": "medium",
+    "approximate_price": "Passeios aos parrachos são cobrados por operadora e variam conforme maré e estrutura.",
+    "tide_dependency": true,
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-5.2725,-35.3788",
+    "latitude": -5.2725,
+    "longitude": -35.3788,
+    "distance_from_natal_km": 55,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "snorkel em piscinas naturais",
+      "passeio embarcado",
+      "banho de mar nos recifes"
+    ],
+    "highlights": [
+      "Parrachos com pé — mais acessíveis que Maracajaú para crianças e não-nadadores",
+      "Inserção na APA dos Recifes de Corais",
+      "Boa alternativa para variar o cluster de recifes no roteiro"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["adventure", "nature", "photos", "day_trips"],
+    "mvp_relevance": "Oferece variedade dentro do cluster de recifes, com perfil mais acessível que Maracajaú.",
+    "image_candidates": [],
+    "image_note": "image needed — validar imagem livre específica dos parrachos antes do uso público.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Rio_do_Fogo",
+        "note": "Confirma a costa do município e sua inserção na APA dos Recifes de Corais."
+      },
+      {
+        "url": "https://arrumaessamala.com.br/parrachos-de-maracajau/",
+        "note": "Confirma a diferença chave: parrachos de Rio do Fogo têm pé; Maracajaú não — ambos no mesmo corredor de recifes."
+      }
+    ]
+  },
+  {
+    "name": "Barra de Tabatinga",
+    "slug": "barra-de-tabatinga",
+    "category": "sunset",
+    "region": "Litoral Sul - Nísia Floresta",
+    "location_label": "Barra de Tabatinga, Nísia Floresta - RN",
+    "short_description": "Praia de falésias e mirantes no litoral sul, associada a pôr do sol e observação de golfinhos.",
+    "long_description": "Barra de Tabatinga é uma das praias mais conhecidas de Nísia Floresta e se destaca pelas falésias e pelos mirantes naturais voltados para o mar, com forte associação ao Mirante dos Golfinhos — ponto de onde se pode avistar golfinhos em alguns períodos do ano.\n\nPara o MVP, ela é especialmente forte para perfis de pôr do sol, fotos e viagem romântica. Encaixa muito bem como parada de rota combinada com Cotovelo e Cajueiro de Pirangi, formando um roteiro completo do litoral sul.",
+    "best_time": "Fim de tarde para o pôr do sol e avistamento de golfinhos.",
+    "best_season": "O ano inteiro; golfinhos têm maior frequência em determinadas épocas (validar localmente).",
+    "average_duration": "2h–4h",
+    "price_level": "free",
+    "approximate_price": "Praia pública gratuita; custo opcional com alimentação, estacionamento e consumo no entorno.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-6.0587,-35.1020",
+    "latitude": -6.0587,
+    "longitude": -35.102,
+    "distance_from_natal_km": 35,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "observação de pôr do sol",
+      "fotografia do mirante",
+      "avistamento de golfinhos (Mirante dos Golfinhos)",
+      "caminhada nas falésias"
+    ],
+    "highlights": [
+      "Mirante dos Golfinhos — ponto alto para avistamento e fotos",
+      "Falésias com vista panorâmica para o mar",
+      "Pôr do sol de alta qualidade fotográfica",
+      "Rota natural no litoral sul com Cotovelo e Cajueiro"
+    ],
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["sunset", "photos", "romantic", "beaches", "day_trips", "cheap"],
+    "mvp_relevance": "É um ponto forte de pôr do sol e paisagem no litoral sul, ótimo para personalização por humor/vibe.",
+    "image_candidates": [],
+    "image_note": "image needed — recomendável imagem livre das falésias ou do mirante.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Barra_de_Tabatinga",
+        "note": "Confirma a praia, sua localização em Nísia Floresta e o destaque visual das falésias."
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/N%C3%ADsia_Floresta",
+        "note": "Confirma Barra de Tabatinga entre as praias do município e a associação ao entardecer e aos golfinhos."
+      }
+    ]
+  },
+  {
+    "name": "Lagoa de Arituba",
+    "slug": "lagoa-de-arituba",
+    "category": "nature",
+    "region": "Litoral Sul - Nísia Floresta",
+    "location_label": "Arituba, Nísia Floresta - RN",
+    "short_description": "Lagoa de água doce muito buscada em passeios de dia, dentro do sistema lacustre de Nísia Floresta.",
+    "long_description": "A Lagoa de Arituba integra o sistema de lagoas de Nísia Floresta, área marcada por grande concentração de corpos d'água, dunas e paisagens de transição entre interior e litoral. Embora a indexação pública seja mais fraca que a de praias famosas do entorno, Arituba aparece no contexto do sistema lacustre local e na lógica turística do município.\n\nPara o MVP, ela é valiosa porque abre a categoria lagoa de água doce, muito querida por famílias e grupos locais. É uma boa recomendação para quem quer banho calmo, day use e passeio mais leve fora da praia oceânica.",
+    "best_time": "Manhã e início da tarde.",
+    "best_season": "Melhor em período de chuvas (fev–mai), quando o nível da lagoa está mais alto.",
+    "average_duration": "2h–5h",
+    "price_level": "cheap",
+    "approximate_price": "Uso da lagoa e day use dependem da estrutura local; confirmar operação e preços antes de publicar.",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=-6.0605,-35.1388",
+    "latitude": -6.0605,
+    "longitude": -35.1388,
+    "distance_from_natal_km": 35,
+    "distance_from_airport_km": null,
+    "is_inside_natal": false,
+    "is_day_trip": true,
+    "activities": [
+      "banho de água doce",
+      "day use",
+      "canoagem",
+      "stand-up paddle",
+      "relaxamento na beira da lagoa"
+    ],
+    "highlights": [
+      "Lagoa de água doce — tipologia diferente das praias oceânicas",
+      "Parte do sistema lacustre de Nísia Floresta",
+      "Boa opção para famílias com crianças pequenas"
+    ],
+    "logistic_notes": "Alta prioridade de validação in loco antes de publicar — estrutura e funcionamento a confirmar.",
+    "status": "review",
+    "last_verified_at": "2026-06-07",
+    "tags_vibes": ["nature", "relax", "cheap", "day_trips", "photos"],
+    "mvp_relevance": "Inclui a tipologia lagoa, importante num destino onde o viajante nem sempre quer apenas mar.",
+    "image_candidates": [],
+    "image_note": "image needed — alta prioridade de validação visual e documental antes de publicação.",
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/N%C3%ADsia_Floresta",
+        "note": "Confirma o município como território de numerosas lagoas e proteção ambiental na APA Bonfim-Guaraíras."
+      }
+    ]
+  }
+]

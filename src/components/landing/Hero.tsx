@@ -1,14 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import pontaNegra from "@/assets/places/ponta-negra.jpg";
-import genipabu from "@/assets/places/genipabu.jpg";
-import parqueDunas from "@/assets/places/parque-dunas.jpg";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { PlaceCoverImage, PlaceCoverSkeleton } from "@/components/places/PlaceCoverImage";
+import { selectPlacePreviews } from "@/lib/places/previews";
+import { getPublishedPlaces, type PublishedPlace } from "@/lib/supabase/places";
 import { SunBurst, Waves } from "./SunWaveDecor";
 
-const floatingCards = [
+const floatingCardStyles = [
   {
-    img: pontaNegra,
-    title: "Ponta Negra",
-    tags: "Praia · Fotos · Fim de tarde",
     rotate: "-rotate-3",
     pos: "top-0 left-0 md:left-2",
     delay: "0s",
@@ -16,9 +15,6 @@ const floatingCards = [
     duration: "6s",
   },
   {
-    img: genipabu,
-    title: "Genipabu",
-    tags: "Bate-volta · Dunas · Aventura",
     rotate: "rotate-2",
     pos: "top-24 right-0 md:right-4",
     delay: "1.4s",
@@ -26,9 +22,6 @@ const floatingCards = [
     duration: "7s",
   },
   {
-    img: parqueDunas,
-    title: "Parque das Dunas",
-    tags: "Natureza · Descanso · Família",
     rotate: "-rotate-2",
     pos: "bottom-0 left-8 md:left-20",
     delay: "2.6s",
@@ -38,6 +31,19 @@ const floatingCards = [
 ];
 
 export function Hero() {
+  const { data: places = [], isLoading } = useQuery({
+    queryKey: ["published-places"],
+    queryFn: getPublishedPlaces,
+  });
+  const previewPlaces = useMemo(
+    () =>
+      selectPlacePreviews(places, {
+        limit: 3,
+        preferredSlugs: ["ponta-negra-morro-do-careca", "genipabu", "parque-das-dunas"],
+      }),
+    [places],
+  );
+
   return (
     <section
       id="top"
@@ -75,33 +81,55 @@ export function Hero() {
         </div>
 
         <div className="relative h-[440px] md:h-[520px]">
-          {floatingCards.map((c, i) => (
-            <article
-              key={c.title}
-              style={{
-                animationDelay: c.delay,
-                animationDuration: c.duration,
-              }}
-              className={`absolute w-56 md:w-64 bg-white rounded-3xl p-3 shadow-soft animate-float ${c.rotate} ${c.pos} hover:shadow-soft-lg transition-shadow`}
-            >
-              <div style={{ animationDelay: c.enterDelay }} className="animate-fade-up">
-                <img
-                  src={c.img}
-                  alt={c.title}
-                  width={1024}
-                  height={768}
-                  className="w-full h-32 md:h-36 object-cover rounded-2xl"
-                  loading={i === 0 ? "eager" : "lazy"}
-                />
-                <div className="px-2 pt-3 pb-1">
-                  <h3 className="font-display font-bold text-ink text-base">{c.title}</h3>
-                  <p className="text-xs text-ink/60 mt-0.5">{c.tags}</p>
+          {floatingCardStyles.map((card, i) => {
+            const place = previewPlaces[i] ?? null;
+
+            return (
+              <article
+                key={place?.id ?? i}
+                style={{
+                  animationDelay: card.delay,
+                  animationDuration: card.duration,
+                }}
+                className={`absolute w-56 md:w-64 bg-white rounded-3xl p-3 shadow-soft animate-float ${card.rotate} ${card.pos} hover:shadow-soft-lg transition-shadow`}
+              >
+                <div style={{ animationDelay: card.enterDelay }} className="animate-fade-up">
+                  {isLoading ? (
+                    <PlaceCoverSkeleton className="h-32 w-full rounded-2xl md:h-36" />
+                  ) : (
+                    <PlaceCoverImage
+                      src={place?.coverImageUrl}
+                      alt={place ? `Imagem de ${place.name}` : "Lugar em revisão"}
+                      className="h-32 w-full rounded-2xl md:h-36"
+                      loading={i === 0 ? "eager" : "lazy"}
+                    />
+                  )}
+                  <div className="px-2 pt-3 pb-1">
+                    <h3 className="font-display font-bold text-ink text-base">
+                      {place?.name ?? "Lugar em revisão"}
+                    </h3>
+                    <p className="text-xs text-ink/60 mt-0.5">{formatPlaceTags(place)}</p>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
   );
+}
+
+function formatPlaceTags(place: PublishedPlace | null) {
+  if (!place) {
+    return "Imagens reais em atualização";
+  }
+
+  const vibeLabels = place.vibes.slice(0, 3).map((vibe) => vibe.label);
+
+  if (vibeLabels.length > 0) {
+    return vibeLabels.join(" · ");
+  }
+
+  return place.category;
 }
