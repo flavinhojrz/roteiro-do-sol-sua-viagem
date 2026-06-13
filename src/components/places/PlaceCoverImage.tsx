@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { safeHttpsUrl } from "@/lib/security/validation";
 import { cn } from "@/lib/utils";
 
 type PlaceCoverImageProps = {
@@ -18,15 +19,16 @@ export function PlaceCoverImage({
   loading = "lazy",
   fallbackLabel = "Imagem em revisão",
 }: PlaceCoverImageProps) {
+  const safeSrc = safeHttpsUrl(src);
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
   const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
-  const showImage = Boolean(src) && failedSrc !== src;
-  const isLoaded = Boolean(src) && loadedSrc === src;
+  const showImage = Boolean(safeSrc) && failedSrc !== safeSrc;
+  const isLoaded = Boolean(safeSrc) && loadedSrc === safeSrc;
 
   useEffect(() => {
     setFailedSrc(null);
     setLoadedSrc(null);
-  }, [src]);
+  }, [safeSrc]);
 
   return (
     <div
@@ -39,7 +41,7 @@ export function PlaceCoverImage({
         <>
           {!isLoaded ? <PlaceCoverSkeleton className="absolute inset-0" /> : null}
           <img
-            src={src ?? undefined}
+            src={safeSrc ?? undefined}
             alt={alt}
             loading={loading}
             className={cn(
@@ -47,8 +49,9 @@ export function PlaceCoverImage({
               isLoaded ? "opacity-100" : "opacity-0",
               imageClassName,
             )}
-            onLoad={() => setLoadedSrc(src ?? null)}
-            onError={() => setFailedSrc(src ?? null)}
+            referrerPolicy="no-referrer"
+            onLoad={() => setLoadedSrc(safeSrc)}
+            onError={() => setFailedSrc(safeSrc)}
           />
         </>
       ) : (

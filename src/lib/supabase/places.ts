@@ -104,7 +104,7 @@ const placeColumns = `
   status
 `;
 
-const placeWithRelationsColumns = `
+export const placeWithRelationsColumns = `
   ${placeColumns},
   place_images (
     id,
@@ -166,7 +166,7 @@ async function getPublishedPlacesWithoutRelations(): Promise<PublishedPlace[]> {
   );
 }
 
-function mapPublishedPlace(place: PlaceRow): PublishedPlace {
+export function mapPublishedPlace(place: PlaceRow): PublishedPlace {
   const images = [...(place.place_images ?? [])].sort(compareBySortOrder);
   const coverImage = images.find((image) => image.is_cover) ?? images[0] ?? null;
 

@@ -1,7 +1,10 @@
-import { createClient } from "@supabase/supabase-js";
+import { lookup } from "node:dns/promises";
 import { readFile } from "node:fs/promises";
+import { isIP } from "node:net";
 import { extname } from "node:path";
+import { isAbsolute, relative, resolve } from "node:path";
 import process from "node:process";
+import { createAdminSupabaseClient } from "./supabase-admin";
 
 type PlaceImageManifestItem = {
   slug: string;
@@ -24,25 +27,12 @@ const bucketName = "places";
 const downloadAttempts = 4;
 const imageDelayMs = 1_500;
 const remoteUserAgent = "RoteiroDoSol/0.1 (development image importer)";
+const allowedLocalImageRoot = resolve("data/place-images");
+const maxImageBytes = 10 * 1024 * 1024;
+const maxRedirects = 3;
+const requestTimeoutMs = 15_000;
 
-const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
-
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-if (!supabaseUrl) {
-  throw new Error("Missing SUPABASE_URL or VITE_SUPABASE_URL");
-}
-
-if (!supabaseServiceRoleKey) {
-  throw new Error("Missing SUPABASE_SERVICE_ROLE_KEY");
-}
-
-const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-  },
-});
+const supabase = createAdminSupabaseClient();
 
 function assertStringField(item: Record<string, unknown>, field: keyof PlaceImageManifestItem) {
   const value = item[field];
@@ -112,20 +102,31 @@ function validateManifestItem(item: PlaceImageManifestItem) {
 
   validateUrl(item.sourceUrl, `sourceUrl de "${item.slug}"`);
 
-  if (item.fileName.includes("..") || item.fileName.startsWith("/")) {
-    throw new Error(`fileName inválido para "${item.slug}": não use caminhos absolutos ou "..".`);
+  if (item.fileName.includes("..") || /[\\/]/.test(item.fileName)) {
+    throw new Error(`fileName inválido para "${item.slug}": informe apenas o nome do arquivo.`);
   }
 
-  if (item.localFile?.includes("\0")) {
-    throw new Error(`localFile inválido para "${item.slug}".`);
+  if (item.localFile) {
+    const resolvedLocalFile = resolve(item.localFile);
+    const relativePath = relative(allowedLocalImageRoot, resolvedLocalFile);
+    if (
+      item.localFile.includes("\0") ||
+      relativePath.startsWith("..") ||
+      isAbsolute(relativePath)
+    ) {
+      throw new Error(`localFile inválido para "${item.slug}": use apenas data/place-images.`);
+    }
   }
 }
 
 function validateUrl(url: string, fieldName: string) {
   try {
-    new URL(url);
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" || parsed.username || parsed.password) {
+      throw new Error("unsafe URL");
+    }
   } catch {
-    throw new Error(`${fieldName} precisa ser uma URL válida.`);
+    throw new Error(`${fieldName} precisa ser uma URL HTTPS válida, sem credenciais.`);
   }
 }
 
@@ -248,6 +249,11 @@ async function loadLocalImage(item: PlaceImageManifestItem) {
   if (fileBody.byteLength === 0) {
     throw new Error(`Arquivo local vazio: "${item.localFile}".`);
   }
+  if (fileBody.byteLength > maxImageBytes) {
+    throw new Error(`Arquivo local excede o limite de 10 MB: "${item.localFile}".`);
+  }
+
+  assertImageSignature(new Uint8Array(fileBody), contentType);
 
   return {
     contentType,
@@ -262,12 +268,7 @@ async function downloadRemoteImage(item: PlaceImageManifestItem) {
 
   for (let attempt = 1; attempt <= downloadAttempts; attempt += 1) {
     try {
-      const response = await fetch(item.remoteUrl, {
-        headers: {
-          Accept: "image/*",
-          "User-Agent": remoteUserAgent,
-        },
-      });
+      const response = await fetchSafeRemoteUrl(item.remoteUrl);
 
       if (!response.ok) {
         throw new HttpDownloadError(
@@ -277,11 +278,12 @@ async function downloadRemoteImage(item: PlaceImageManifestItem) {
       }
 
       const contentType = getRemoteContentType(item, response);
-      const fileBody = await response.arrayBuffer();
+      const fileBody = await readResponseWithLimit(response);
 
       if (fileBody.byteLength === 0) {
         throw new Error(`Download retornou arquivo vazio para "${item.remoteUrl}".`);
       }
+      assertImageSignature(new Uint8Array(fileBody), contentType);
 
       return {
         contentType,
@@ -309,6 +311,132 @@ async function downloadRemoteImage(item: PlaceImageManifestItem) {
   }
 
   throw new Error(`Download remoto falhou para "${item.remoteUrl}".`);
+}
+
+async function fetchSafeRemoteUrl(urlValue: string, redirects = 0): Promise<Response> {
+  const url = new URL(urlValue);
+  await assertPublicRemoteHost(url);
+
+  const response = await fetch(url, {
+    headers: {
+      Accept: "image/*",
+      "User-Agent": remoteUserAgent,
+    },
+    redirect: "manual",
+    signal: AbortSignal.timeout(requestTimeoutMs),
+  });
+
+  if (response.status >= 300 && response.status < 400) {
+    const location = response.headers.get("location");
+    if (!location || redirects >= maxRedirects) {
+      throw new Error(`Redirecionamento remoto inválido para "${url.hostname}".`);
+    }
+    const nextUrl = new URL(location, url);
+    validateUrl(nextUrl.toString(), "URL de redirecionamento");
+    return fetchSafeRemoteUrl(nextUrl.toString(), redirects + 1);
+  }
+
+  return response;
+}
+
+async function assertPublicRemoteHost(url: URL) {
+  const hostname = url.hostname.toLowerCase();
+  if (
+    hostname === "localhost" ||
+    hostname.endsWith(".localhost") ||
+    hostname.endsWith(".local") ||
+    hostname === "metadata.google.internal"
+  ) {
+    throw new Error("Host remoto privado não é permitido.");
+  }
+
+  const addresses = isIP(hostname)
+    ? [{ address: hostname }]
+    : await lookup(hostname, { all: true, verbatim: true });
+
+  if (addresses.length === 0 || addresses.some(({ address }) => isPrivateAddress(address))) {
+    throw new Error("Endereço remoto privado não é permitido.");
+  }
+}
+
+function isPrivateAddress(address: string): boolean {
+  const normalized = address.toLowerCase();
+  if (normalized.startsWith("::ffff:")) {
+    return isPrivateAddress(normalized.slice("::ffff:".length));
+  }
+
+  if (isIP(normalized) === 6) {
+    return (
+      normalized === "::" ||
+      normalized === "::1" ||
+      normalized.startsWith("fc") ||
+      normalized.startsWith("fd") ||
+      /^fe[89ab]/.test(normalized) ||
+      normalized.startsWith("ff")
+    );
+  }
+
+  const octets = normalized.split(".").map(Number);
+  if (octets.length !== 4 || octets.some((octet) => !Number.isInteger(octet))) return true;
+  const [a, b] = octets;
+  return (
+    a === 0 ||
+    a === 10 ||
+    a === 127 ||
+    a >= 224 ||
+    (a === 100 && b >= 64 && b <= 127) ||
+    (a === 169 && b === 254) ||
+    (a === 172 && b >= 16 && b <= 31) ||
+    (a === 192 && b === 168) ||
+    (a === 198 && (b === 18 || b === 19))
+  );
+}
+
+async function readResponseWithLimit(response: Response): Promise<ArrayBuffer> {
+  const declaredSize = Number(response.headers.get("content-length") ?? 0);
+  if (Number.isFinite(declaredSize) && declaredSize > maxImageBytes) {
+    throw new Error("Imagem remota excede o limite de 10 MB.");
+  }
+  if (!response.body) throw new Error("Resposta remota sem corpo.");
+
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    totalBytes += value.byteLength;
+    if (totalBytes > maxImageBytes) {
+      await reader.cancel();
+      throw new Error("Imagem remota excede o limite de 10 MB.");
+    }
+    chunks.push(value);
+  }
+
+  const output = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    output.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return output.buffer;
+}
+
+function assertImageSignature(bytes: Uint8Array, contentType: string) {
+  const ascii = (start: number, end: number) => String.fromCharCode(...bytes.slice(start, end));
+  const matches =
+    (contentType === "image/jpeg" && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) ||
+    (contentType === "image/png" && bytes[0] === 0x89 && ascii(1, 4) === "PNG") ||
+    (contentType === "image/gif" && (ascii(0, 6) === "GIF87a" || ascii(0, 6) === "GIF89a")) ||
+    (contentType === "image/webp" && ascii(0, 4) === "RIFF" && ascii(8, 12) === "WEBP") ||
+    (contentType === "image/avif" &&
+      ascii(4, 8) === "ftyp" &&
+      ["avif", "avis"].includes(ascii(8, 12)));
+
+  if (!matches) {
+    throw new Error(`Conteúdo do arquivo não corresponde ao tipo ${contentType}.`);
+  }
 }
 
 function getRemoteContentType(item: PlaceImageManifestItem, response: Response) {

@@ -1,3 +1,5 @@
+import { genericTelemetryError } from "./safe-error";
+
 type LovableErrorOptions = {
   mechanism?: "manual" | "onerror" | "unhandledrejection" | "react_error_boundary";
   handled?: boolean;
@@ -21,10 +23,11 @@ declare global {
 export function reportLovableError(error: unknown, context: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
-    error,
+    genericTelemetryError(),
     {
       source: "react_error_boundary",
-      route: window.location.pathname,
+      route: sanitizeRouteForTelemetry(window.location.pathname),
+      originalErrorType: error instanceof Error ? error.name : "unknown",
       ...context,
     },
     {
@@ -33,4 +36,10 @@ export function reportLovableError(error: unknown, context: Record<string, unkno
       severity: "error",
     },
   );
+}
+
+function sanitizeRouteForTelemetry(pathname: string): string {
+  if (pathname.startsWith("/r/")) return "/r/:slug";
+  if (pathname.startsWith("/lugar/")) return "/lugar/:slug";
+  return pathname.slice(0, 120);
 }

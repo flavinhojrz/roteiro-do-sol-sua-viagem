@@ -1,10 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Clock, MapPin, Wallet } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, MapPin, Sparkles, Wallet } from "lucide-react";
+import { useMemo, useState } from "react";
 import { SunBurst, Waves } from "@/components/landing/SunWaveDecor";
 import { PlaceCoverImage } from "@/components/places/PlaceCoverImage";
-import { Button } from "@/components/ui/button";
-import { getPublishedPlaces, type PublishedPlace } from "@/lib/supabase/places";
+import { SaveToRoteiroButton } from "@/components/places/SaveToRoteiroButton";
+import { displayPrice, displayRegion } from "@/lib/places/format";
+import { useSavedPlaceIds } from "@/lib/roteiro/saved-places";
+import { hasTravelAnswers, loadTravelAnswers } from "@/lib/recommendations/answers-storage";
+import { groupRecommendations } from "@/lib/recommendations/group-recommendations";
+import { splitRecommendations } from "@/lib/recommendations/personalize";
+import { recommendPlaces } from "@/lib/recommendations/recommend-places";
+import type { RecommendationSection, RecommendedPlace } from "@/lib/recommendations/types";
+import { getPublishedPlaces } from "@/lib/supabase/places";
 
 export const Route = createFileRoute("/roteiro")({
   head: () => ({
@@ -29,29 +37,89 @@ function RoteiroPage() {
     queryFn: getPublishedPlaces,
   });
 
+  // Respostas do onboarding (sessionStorage). Lidas uma vez no carregamento.
+  const answers = useMemo(() => loadTravelAnswers(), []);
+  const personalized = hasTravelAnswers(answers);
+  const savedCount = useSavedPlaceIds().length;
+  const [showAll, setShowAll] = useState(false);
+
+  const { sections, exploreMorePlaces } = useMemo(() => {
+    const ranked = recommendPlaces(places, answers);
+
+    // Sem respostas do onboarding: mostra o catálogo completo, sem fingir curadoria.
+    if (!personalized) {
+      const all: RecommendationSection = {
+        id: "all",
+        title: "Todos os lugares da base",
+        description: "Faça o onboarding para receber uma seleção personalizada.",
+        items: ranked,
+      };
+      return { sections: [all], exploreMorePlaces: [] as RecommendedPlace[] };
+    }
+
+    // Limite duro: separa a curadoria personalizada do catálogo completo.
+    const { personalizedRecommendations, exploreMorePlaces: explore } = splitRecommendations(
+      ranked,
+      answers,
+    );
+
+    if (import.meta.env.DEV) {
+      // Debug só em desenvolvimento: o que entrou na recomendação principal x o que sobrou.
+      const toRow = (item: RecommendedPlace) => ({
+        name: item.place.name,
+        score: item.score,
+        tier: item.tier,
+        reasons: item.reasons.join(" | "),
+      });
+      console.table(personalizedRecommendations.map(toRow));
+      console.table(explore.map(toRow));
+    }
+
+    // As seções nascem da lista JÁ limitada — nunca da base inteira.
+    return {
+      sections: groupRecommendations(personalizedRecommendations),
+      exploreMorePlaces: explore,
+    };
+  }, [places, answers, personalized]);
+
   return (
     <div className="relative min-h-screen bg-gradient-sky overflow-hidden">
       <SunBurst className="pointer-events-none absolute -top-10 -right-10 w-72 h-72 md:w-96 md:h-96 opacity-50 animate-sun-pulse" />
       <Waves className="pointer-events-none absolute bottom-0 left-0 w-[110%] h-24 md:h-32 animate-wave-drift" />
 
       <div className="relative mx-auto max-w-6xl px-5 md:px-8 py-12 md:py-20">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink/70 hover:text-coral transition-colors"
-        >
-          <ArrowLeft size={16} /> Voltar para a home
-        </Link>
+        <div className="flex items-center justify-between gap-3">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink/70 hover:text-coral transition-colors"
+          >
+            <ArrowLeft size={16} /> Voltar para a home
+          </Link>
+          <Link
+            to="/meu-roteiro"
+            className="press inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink shadow-soft hover:shadow-soft-lg"
+          >
+            ☀️ Meu Roteiro
+            {savedCount > 0 ? (
+              <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-coral px-1.5 text-xs font-extrabold text-white">
+                {savedCount}
+              </span>
+            ) : null}
+          </Link>
+        </div>
 
         <div className="mt-8 md:mt-12 text-center md:text-left animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur px-4 py-1.5 text-xs font-bold text-sea uppercase tracking-wider">
             ✨ Seu roteiro
           </span>
           <h1 className="mt-5 font-display font-extrabold text-3xl md:text-5xl leading-tight text-ink">
-            Lugares que combinam com{" "}
+            Lugares que mais combinam com{" "}
             <span className="bg-gradient-sun bg-clip-text text-transparent">sua vibe ☀️</span>
           </h1>
           <p className="mt-4 text-ink/65 text-base md:text-lg max-w-xl mx-auto md:mx-0">
-            Esses são os primeiros lugares reais da nossa base em Natal e arredores.
+            {personalized
+              ? "Selecionamos algumas opções pensando no seu tempo, orçamento e jeito de viajar."
+              : "Organizamos os primeiros lugares reais da nossa base pensando no seu jeito de viajar."}
           </p>
         </div>
 
@@ -67,15 +135,60 @@ function RoteiroPage() {
             />
           ) : null}
 
-          {!isLoading && !isError && places.length === 0 ? (
+          {!isLoading && !isError && sections.length === 0 ? (
             <CatalogStatus message="Ainda estamos preparando os primeiros lugares do Roteiro do Sol." />
           ) : null}
 
-          {!isLoading && !isError && places.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {places.map((place, index) => (
-                <PlaceCard key={place.id} place={place} index={index} />
+          {!isLoading && !isError && sections.length > 0 ? (
+            <div className="space-y-14">
+              {sections.map((section) => (
+                <div key={section.id}>
+                  <div className="mb-6">
+                    <h2 className="font-display text-2xl md:text-3xl font-extrabold text-ink">
+                      {section.title}
+                    </h2>
+                    <p className="mt-1.5 text-ink/60 text-sm md:text-base">{section.description}</p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    {section.items.map((item, index) => (
+                      <PlaceCard key={item.place.id} recommendation={item} index={index} />
+                    ))}
+                  </div>
+                </div>
               ))}
+            </div>
+          ) : null}
+
+          {!isLoading && !isError && exploreMorePlaces.length > 0 ? (
+            <div className="mt-16">
+              {showAll ? (
+                <div>
+                  <div className="mb-6">
+                    <h2 className="font-display text-2xl md:text-3xl font-extrabold text-ink">
+                      Outras ideias para explorar
+                    </h2>
+                    <p className="mt-1.5 text-ink/60 text-sm md:text-base">
+                      Esses lugares também estão na nossa base, mas não são prioridade para o seu
+                      roteiro agora.
+                    </p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    {exploreMorePlaces.map((item, index) => (
+                      <PlaceCard key={item.place.id} recommendation={item} index={index} />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowAll(true)}
+                    className="press inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-ink shadow-soft hover:shadow-soft-lg hover:-translate-y-0.5"
+                  >
+                    Ver todos os lugares ({exploreMorePlaces.length})
+                  </button>
+                </div>
+              )}
             </div>
           ) : null}
         </section>
@@ -116,10 +229,10 @@ function CatalogStatus({
   );
 }
 
-function PlaceCard({ place, index }: { place: PublishedPlace; index: number }) {
-  const displayRegion = place.region ?? place.locationLabel ?? "Natal e arredores";
+function PlaceCard({ recommendation, index }: { recommendation: RecommendedPlace; index: number }) {
+  const { place, reasons } = recommendation;
+  const topReason = reasons[0];
   const displayBestTime = place.bestTime ?? "Horário a confirmar";
-  const displayPrice = place.approximatePrice ?? formatPriceLevel(place.priceLevel);
   const tags =
     place.vibes.length > 0
       ? place.vibes
@@ -159,11 +272,18 @@ function PlaceCard({ place, index }: { place: PublishedPlace; index: number }) {
             </h2>
             <p className="inline-flex max-w-full items-center gap-2 text-sm font-bold leading-5 text-sea">
               <MapPin size={15} className="shrink-0" />
-              <span className="truncate">{displayRegion}</span>
+              <span className="truncate">{displayRegion(place)}</span>
             </p>
           </div>
 
           <p className="line-clamp-3 text-sm leading-6 text-ink/65">{place.shortDescription}</p>
+
+          {topReason ? (
+            <p className="inline-flex items-start gap-2 rounded-2xl bg-sun/20 px-3 py-2 text-sm font-semibold leading-5 text-ink">
+              <Sparkles size={15} className="mt-0.5 shrink-0 text-coral" />
+              <span>{topReason}</span>
+            </p>
+          ) : null}
 
           <div className="grid gap-3 text-sm leading-6 text-ink/70">
             <span className="inline-flex items-start gap-2.5">
@@ -172,7 +292,7 @@ function PlaceCard({ place, index }: { place: PublishedPlace; index: number }) {
             </span>
             <span className="inline-flex items-start gap-2.5">
               <Wallet size={16} className="mt-0.5 shrink-0 text-coral" />
-              <span>{displayPrice}</span>
+              <span>{displayPrice(place)}</span>
             </span>
           </div>
 
@@ -189,24 +309,18 @@ function PlaceCard({ place, index }: { place: PublishedPlace; index: number }) {
           </div>
         </div>
 
-        <div className="mt-auto pt-6">
-          <Button
-            type="button"
-            className="press w-full rounded-full bg-gradient-sun text-sm font-extrabold text-ink shadow-coral hover:shadow-coral-lg"
+        <div className="mt-auto flex flex-col gap-2 pt-6">
+          <SaveToRoteiroButton placeId={place.id} className="w-full" />
+          <Link
+            to="/lugar/$slug"
+            params={{ slug: place.slug }}
+            className="press inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-ink shadow-soft hover:shadow-soft-lg"
           >
             Ver detalhes
             <ArrowRight size={16} />
-          </Button>
+          </Link>
         </div>
       </div>
     </article>
   );
-}
-
-function formatPriceLevel(priceLevel: string) {
-  if (!priceLevel) {
-    return "Preço a confirmar";
-  }
-
-  return priceLevel;
 }

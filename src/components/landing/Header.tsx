@@ -1,15 +1,69 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Loader2, Menu, X } from "lucide-react";
+import { signInWithGoogle, signOut, useSession } from "@/lib/auth/session";
 
 const navLinks = [
   { label: "Como funciona", href: "#como-funciona" },
   { label: "Explorar exemplos", href: "#lugares" },
-  { label: "Entrar", href: "#entrar" },
 ];
+
+function useGoogleLogin() {
+  const [connecting, setConnecting] = useState(false);
+
+  const login = async () => {
+    setConnecting(true);
+    try {
+      await signInWithGoogle("/meu-roteiro");
+    } catch (error) {
+      if (import.meta.env.DEV) console.error("Falha no login com Google:", error);
+      setConnecting(false);
+    }
+  };
+
+  return { connecting, login };
+}
+
+function EntrarButton({ className }: { className?: string }) {
+  const { session, loading } = useSession();
+  const { connecting, login } = useGoogleLogin();
+
+  if (loading) {
+    return null;
+  }
+
+  if (session) {
+    return (
+      <Link
+        to="/meus-roteiros"
+        className={
+          className ?? "text-sm font-semibold text-ink/80 transition-colors hover:text-coral"
+        }
+      >
+        Meus Roteiros
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={login}
+      disabled={connecting}
+      className={
+        className ??
+        "inline-flex items-center gap-1.5 text-sm font-semibold text-ink/80 transition-colors hover:text-coral disabled:opacity-60"
+      }
+    >
+      {connecting ? <Loader2 size={14} className="animate-spin" /> : null}
+      {connecting ? "Entrando..." : "Entrar"}
+    </button>
+  );
+}
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { session } = useSession();
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-sand-soft/70 border-b border-white/40">
@@ -32,6 +86,16 @@ export function Header() {
               {l.label}
             </a>
           ))}
+          <EntrarButton />
+          {session ? (
+            <button
+              type="button"
+              onClick={() => void signOut()}
+              className="text-sm font-semibold text-ink/50 transition-colors hover:text-coral"
+            >
+              Sair
+            </button>
+          ) : null}
           <Link
             to="/onboarding"
             className="press group inline-flex items-center justify-center rounded-full bg-coral px-5 py-2.5 text-sm font-bold text-white shadow-coral hover:shadow-coral-lg hover:-translate-y-0.5"
@@ -73,6 +137,19 @@ export function Header() {
                 {l.label}
               </a>
             ))}
+            <EntrarButton className="text-left text-base font-semibold text-ink py-2" />
+            {session ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  void signOut();
+                }}
+                className="text-left text-base font-semibold text-ink/60 py-2"
+              >
+                Sair
+              </button>
+            ) : null}
           </div>
         </div>
       )}

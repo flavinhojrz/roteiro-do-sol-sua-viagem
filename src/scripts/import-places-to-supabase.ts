@@ -1,5 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
 import { readFile } from "node:fs/promises";
+import { createAdminSupabaseClient } from "./supabase-admin";
 
 type PlaceStatus = "draft" | "review" | "published" | "archived";
 
@@ -51,24 +51,7 @@ type RawPlace = {
   sources?: RawSource[];
 };
 
-const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
-
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-if (!supabaseUrl) {
-  throw new Error("Missing SUPABASE_URL or VITE_SUPABASE_URL");
-}
-
-if (!supabaseServiceRoleKey) {
-  throw new Error("Missing SUPABASE_SERVICE_ROLE_KEY");
-}
-
-const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-  },
-});
+const supabase = createAdminSupabaseClient();
 
 function normalizeNumber(value: number | null | undefined) {
   return typeof value === "number" && Number.isFinite(value) ? value : null;

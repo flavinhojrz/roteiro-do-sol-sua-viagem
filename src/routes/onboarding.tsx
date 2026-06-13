@@ -17,7 +17,9 @@ import {
   type QuizAnswers,
 } from "@/components/onboarding/quiz-data";
 import { SunBurst, Waves } from "@/components/landing/SunWaveDecor";
-import { selectPlacePreviews } from "@/lib/places/previews";
+import { saveTravelAnswers, toTravelAnswers } from "@/lib/recommendations/answers-storage";
+import { splitRecommendations } from "@/lib/recommendations/personalize";
+import { recommendPlaces } from "@/lib/recommendations/recommend-places";
 import { getPublishedPlaces, type PublishedPlace } from "@/lib/supabase/places";
 import { cn } from "@/lib/utils";
 
@@ -60,7 +62,10 @@ function OnboardingPage() {
   const goNext = () => {
     setDirection(1);
     if (step < TOTAL) setStep((s) => s + 1);
-    else setPhase("preparing");
+    else {
+      saveTravelAnswers(answers);
+      setPhase("preparing");
+    }
   };
   const goBack = () => {
     setDirection(-1);
@@ -95,7 +100,7 @@ function OnboardingPage() {
       />
     );
   if (phase === "preparing") {
-    return <Preparing transition={transition} selectedVibes={answers.vibes} />;
+    return <Preparing transition={transition} answers={answers} />;
   }
 
   return (
@@ -401,19 +406,25 @@ function Intro({ onStart }: { onStart: () => void }) {
 
 function Preparing({
   transition,
-  selectedVibes,
+  answers,
 }: {
   transition: ReturnType<typeof pickTransition>;
-  selectedVibes: string[];
+  answers: QuizAnswers;
 }) {
   const { data: places = [], isLoading } = useQuery({
     queryKey: ["published-places"],
     queryFn: getPublishedPlaces,
   });
-  const previewPlaces = useMemo(
-    () => selectPlacePreviews(places, { selectedVibes, limit: 5 }),
-    [places, selectedVibes],
-  );
+  const previewPlaces = useMemo(() => {
+    // Usa apenas os melhores lugares personalizados (os mesmos que vão para a
+    // tela principal) e mostra de 3 a 5 previews reais com imagem.
+    const ranked = recommendPlaces(places, toTravelAnswers(answers));
+    const { personalizedRecommendations } = splitRecommendations(ranked, toTravelAnswers(answers));
+    return personalizedRecommendations
+      .filter((item) => Boolean(item.place.coverImageUrl))
+      .slice(0, 5)
+      .map((item) => item.place);
+  }, [places, answers]);
 
   return (
     <div className="relative min-h-screen bg-gradient-sky overflow-hidden flex items-center justify-center px-5 py-10">
