@@ -59,8 +59,7 @@ export function buildPublicItineraryMeta(
 ): PublicItineraryMeta {
   const name = itinerary?.name?.trim();
   const title = name ? `Roteiro de ${name} em Natal ☀️` : "Roteiro em Natal ☀️";
-  const description =
-    "Veja os lugares escolhidos nesse roteiro personalizado pelo Roteiro do Sol.";
+  const description = "Veja os lugares escolhidos nesse roteiro personalizado pelo Roteiro do Sol.";
 
   return {
     title,

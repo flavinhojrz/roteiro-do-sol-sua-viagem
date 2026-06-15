@@ -7,9 +7,19 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Outside Lovable, Nitro is disabled by default. Vercel needs the Nitro
+  // deployment bundle in its Build Output API format.
+  nitro: {
+    preset: "vercel",
+    output: {
+      dir: ".vercel/output",
+      serverDir: ".vercel/output/functions/__server.func",
+      publicDir: ".vercel/output/static",
+    },
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
+    // Nitro/Vite builds from this.
     server: { entry: "server" },
   },
   vite: {
@@ -21,11 +31,7 @@ export default defineConfig({
           manualChunks(id) {
             if (!id.includes("node_modules")) return;
             if (id.includes("@supabase")) return "supabase";
-            if (
-              id.includes("/react-dom/") ||
-              id.includes("/react/") ||
-              id.includes("/scheduler/")
-            )
+            if (id.includes("/react-dom/") || id.includes("/react/") || id.includes("/scheduler/"))
               return "react";
             if (id.includes("@tanstack")) return "tanstack";
           },

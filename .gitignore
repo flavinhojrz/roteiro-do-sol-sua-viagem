@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 dist
+coverage
 data/place-images/*
 !data/place-images/manifest.json
 dist-ssr
@@ -16,6 +17,8 @@ dist-ssr
 .vinxi
 .tanstack/**
 .nitro
+.vercel
+.cache
 *.local
 .env*
 !.env.example
@@ -28,6 +31,7 @@ credentials*.json
 SECRET_*.txt
 secret-*.txt
 SECURITY.*
+!SECURITY.md
 
 # Wrangler / Cloudflare
 .wrangler/
@@ -38,6 +42,7 @@ SECURITY.*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj

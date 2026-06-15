@@ -26,6 +26,7 @@ O site conduz a pessoa por um quiz curto sobre companhia, duração da viagem, i
 - [Configuração local](#configuração-local)
 - [Configuração do Supabase](#configuração-do-supabase)
 - [Variáveis de ambiente](#variáveis-de-ambiente)
+- [Publicação na Vercel](#publicação-na-vercel)
 - [Importação do catálogo](#importação-do-catálogo)
 - [Scripts disponíveis](#scripts-disponíveis)
 - [Rotas da aplicação](#rotas-da-aplicação)
@@ -251,7 +252,13 @@ O `bunfig.toml` aplica uma janela mínima de 24 horas para versões recém-publi
 
 ### 2. Configure as variáveis públicas
 
-Crie um arquivo `.env.local` com:
+Copie o arquivo de exemplo:
+
+```bash
+cp .env.example .env.local
+```
+
+Depois preencha:
 
 ```dotenv
 VITE_SUPABASE_URL=https://SEU-PROJETO.supabase.co
@@ -320,15 +327,20 @@ No painel do Supabase:
 Para desenvolvimento, permita a origem:
 
 ```text
-http://localhost:8080
+http://localhost:8080/**
 ```
 
-Como o app retorna para diferentes páginas após o login, uma regra com wildcard para o ambiente local e para o domínio de produção simplifica o fluxo, por exemplo:
+Em produção, defina a **Site URL** com o domínio oficial e adicione exatamente as páginas usadas como retorno do login:
 
 ```text
-http://localhost:8080/**
-https://seu-dominio.example/**
+https://seu-dominio.example
+https://seu-dominio.example/compartilhar
+https://seu-dominio.example/meu-roteiro
+https://seu-dominio.example/meus-roteiros
+https://seu-dominio.example/minha-conta
 ```
+
+Evite wildcard no domínio oficial. Para deployments temporários de Preview da Vercel, o Supabase aceita um padrão separado como `https://*-SEU-USUARIO.vercel.app/**`.
 
 O login por magic link existe na camada de autenticação, mas não está habilitado no fluxo principal enquanto o projeto não tiver uma configuração própria de SMTP.
 
@@ -351,6 +363,8 @@ Os créditos, licença, texto alternativo e URL de origem também são registrad
 | `VITE_SUPABASE_URL` | Sim         | Pública   | URL do projeto Supabase               |
 | `VITE_SUPABASE_KEY` | Sim         | Pública   | Chave publishable ou anon do frontend |
 
+Essas são as únicas variáveis que o deploy da Vercel precisa atualmente. Como possuem o prefixo `VITE_`, seus valores são incorporados ao bundle do navegador durante a build. A segurança dos dados não depende de esconder essa chave pública, mas das policies de RLS e das RPCs configuradas no Supabase.
+
 ### Scripts administrativos
 
 | Variável                    | Obrigatória | Exposição      | Uso                          |
@@ -359,16 +373,110 @@ Os créditos, licença, texto alternativo e URL de origem também são registrad
 | `SUPABASE_SECRET_KEY`       | Sim         | Secreta        | Chave administrativa moderna |
 | `SUPABASE_SERVICE_ROLE_KEY` | Alternativa | Secreta        | Chave legada `service_role`  |
 
-`SUPABASE_URL` pode usar `VITE_SUPABASE_URL` como fallback. Já a chave administrativa nunca deve usar prefixo `VITE_`, nunca deve ser commitada e nunca deve ser enviada ao navegador.
+`SUPABASE_URL` pode usar `VITE_SUPABASE_URL` como fallback. Já a chave administrativa nunca deve usar prefixo `VITE_`, nunca deve ser commitada, nunca deve ser enviada ao navegador e **não deve ser cadastrada na Vercel**.
 
-Exemplo para importação:
+Para preparar o ambiente administrativo local:
+
+```bash
+cp .env.admin.example .env.admin.local
+```
+
+Exemplo:
 
 ```dotenv
 SUPABASE_URL=https://SEU-PROJETO.supabase.co
 SUPABASE_SECRET_KEY=sb_secret_...
 ```
 
-Os arquivos `.env*` são ignorados pelo Git.
+Os arquivos reais `.env*` são ignorados pelo Git. Somente `.env.example` e `.env.admin.example`, que contêm placeholders, ficam versionados.
+
+## Publicação na Vercel
+
+O projeto usa o preset `vercel` do Nitro para transformar o servidor TanStack Start em uma Vercel Function e gerar os assets no formato da [Build Output API](https://vercel.com/docs/build-output-api/v3).
+
+A build produz:
+
+```text
+.vercel/output/
+├── config.json
+├── functions/
+│   └── __server.func/
+└── static/
+```
+
+Essa pasta é gerada automaticamente e está no `.gitignore`.
+
+### 1. Importe o repositório
+
+No painel da Vercel, escolha **Add New > Project** e importe o repositório do GitHub.
+
+O arquivo `vercel.json` já define:
+
+- instalação com `bun install --frozen-lockfile`;
+- build com `bun run build`;
+- uso direto da saída gerada pelo Nitro, sem tratar o projeto como um site Vite estático.
+
+Não configure manualmente um **Output Directory** no painel. A Vercel deve consumir `.vercel/output`, que já contém assets, rotas e função SSR.
+
+### 2. Cadastre as variáveis
+
+Em **Settings > Environment Variables**, adicione:
+
+```text
+VITE_SUPABASE_URL
+VITE_SUPABASE_KEY
+```
+
+Cadastre ambas em **Production** e **Preview** caso queira que os deployments de branches funcionem.
+
+Não cadastre:
+
+```text
+SUPABASE_SECRET_KEY
+SUPABASE_SERVICE_ROLE_KEY
+```
+
+Essas chaves ignoram RLS e devem permanecer somente no ambiente administrativo local.
+
+### 3. Confira o runtime
+
+O `package.json` fixa Node.js `24.x`, versão suportada pela Vercel, e Bun `1.3.13` para instalação reproduzível. A função gerada pelo Nitro usa o runtime `nodejs24.x`.
+
+### 4. Configure autenticação e domínio
+
+Depois que a Vercel gerar o domínio:
+
+1. Defina esse domínio como **Site URL** no Supabase Auth.
+2. Cadastre as URLs exatas de retorno listadas na seção [Google OAuth](#google-oauth).
+3. Adicione o domínio personalizado na Vercel, caso exista.
+4. Atualize a Site URL e os redirects do Supabase para o domínio definitivo.
+
+O Google OAuth continua usando a callback do próprio Supabase. Na aplicação, o `redirectTo` retorna para o domínio que iniciou o login.
+
+### 5. Faça as verificações finais
+
+Antes de publicar:
+
+```bash
+bun install --frozen-lockfile
+bun run check
+```
+
+Depois do deploy, confira:
+
+- carregamento da home e das rotas internas por acesso direto;
+- login e logout com Google;
+- criação, edição e exclusão de roteiro;
+- página pública `/r/:slug`;
+- preview Open Graph do link compartilhado;
+- ausência de chaves administrativas no painel e nos logs da Vercel.
+
+Referências oficiais:
+
+- [TanStack Start na Vercel](https://vercel.com/docs/frameworks/full-stack/tanstack-start)
+- [Preset Vercel do Nitro](https://nitro.build/deploy/providers/vercel)
+- [Redirect URLs do Supabase Auth](https://supabase.com/docs/guides/auth/redirect-urls)
+- [Versões do Node.js na Vercel](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions)
 
 ## Importação do catálogo
 
@@ -377,13 +485,13 @@ Os arquivos `.env*` são ignorados pelo Git.
 O arquivo `data/places.json` é a fonte editorial inicial. Para importar ou atualizar os lugares:
 
 ```bash
-bun run src/scripts/import-places-to-supabase.ts
+bun run import:places
 ```
 
 Para usar outro arquivo:
 
 ```bash
-bun run src/scripts/import-places-to-supabase.ts caminho/para/lugares.json
+bun run import:places -- caminho/para/lugares.json
 ```
 
 O importador:
@@ -401,13 +509,13 @@ Embora os 15 itens em `data/places.json` estejam marcados como `review`, o impor
 As imagens são descritas em `data/place-images/manifest.json`.
 
 ```bash
-bun run src/scripts/import-place-images-to-supabase.ts
+bun run import:images
 ```
 
 Também é possível informar outro manifesto:
 
 ```bash
-bun run src/scripts/import-place-images-to-supabase.ts caminho/para/manifest.json
+bun run import:images -- caminho/para/manifest.json
 ```
 
 O script:
@@ -427,15 +535,18 @@ Os arquivos de imagem locais não são versionados. Somente o manifesto é manti
 
 ## Scripts disponíveis
 
-| Comando             | Descrição                                  |
-| ------------------- | ------------------------------------------ |
-| `bun run dev`       | Inicia o ambiente de desenvolvimento       |
-| `bun run build`     | Gera o build de produção                   |
-| `bun run build:dev` | Gera o build usando o modo `development`   |
-| `bun run preview`   | Serve localmente o build gerado            |
-| `bun run lint`      | Executa ESLint e a integração com Prettier |
-| `bun run format`    | Formata o repositório com Prettier         |
-| `bunx tsc --noEmit` | Verifica os tipos TypeScript               |
+| Comando                 | Descrição                                    |
+| ----------------------- | -------------------------------------------- |
+| `bun run dev`           | Inicia o ambiente de desenvolvimento         |
+| `bun run build`         | Gera a saída de produção para a Vercel       |
+| `bun run build:dev`     | Gera o build usando o modo `development`     |
+| `bun run preview`       | Serve localmente o build gerado              |
+| `bun run typecheck`     | Verifica os tipos TypeScript                 |
+| `bun run check`         | Executa tipos, lint e build de produção      |
+| `bun run import:places` | Importa o catálogo usando `.env.admin.local` |
+| `bun run import:images` | Importa as imagens usando `.env.admin.local` |
+| `bun run lint`          | Executa ESLint e a integração com Prettier   |
+| `bun run format`        | Formata o repositório com Prettier           |
 
 ## Rotas da aplicação
 
@@ -524,6 +635,8 @@ Quando a capa do lugar está em WebP, a URL Open Graph usa `images.weserv.nl` pa
 
 ```text
 .
+├── .env.example                    # Variáveis públicas sem valores reais
+├── .env.admin.example              # Variáveis administrativas sem segredos
 ├── data/
 │   ├── places.json                  # Catálogo editorial inicial
 │   └── place-images/
@@ -559,6 +672,7 @@ Quando a capa do lugar está em WebP, a URL Open Graph usa `images.weserv.nl` pa
 │   └── styles.css                   # Tema e estilos globais
 ├── supabase/
 │   └── migrations/                  # Migrações SQL
+├── vercel.json                      # Build e instalação na Vercel
 ├── vite.config.ts
 ├── tsconfig.json
 └── package.json
@@ -569,9 +683,7 @@ Quando a capa do lugar está em WebP, a URL Open Graph usa `images.weserv.nl` pa
 Antes de enviar mudanças, execute:
 
 ```bash
-bun run lint
-bunx tsc --noEmit
-bun run build
+bun run check
 ```
 
 O projeto ainda não possui uma suíte automatizada de testes. As áreas prioritárias para testes unitários são:
