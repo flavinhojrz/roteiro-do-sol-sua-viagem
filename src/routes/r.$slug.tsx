@@ -6,6 +6,12 @@ import { SunBurst, Waves } from "@/components/landing/SunWaveDecor";
 import { PlaceCoverImage } from "@/components/places/PlaceCoverImage";
 import { displayPrice, displayRegion } from "@/lib/places/format";
 import {
+  buildPublicItineraryMeta,
+  publicItineraryHeadLinks,
+  publicItineraryHeadMeta,
+} from "@/lib/seo/public-itinerary-meta";
+import { resolveRequestOrigin } from "@/lib/seo/request-origin";
+import {
   getPublicItinerary,
   ItineraryNotFoundError,
   type PublicItinerary,
@@ -13,21 +19,47 @@ import {
 import type { PublishedPlace } from "@/lib/supabase/places";
 
 export const Route = createFileRoute("/r/$slug")({
-  head: () => ({
-    meta: [
-      { title: "Roteiro em Natal — Roteiro do Sol" },
-      { name: "robots", content: "noindex, nofollow" },
-    ],
-  }),
+  // Roda no servidor (SSR) no primeiro acesso, então os metadados ficam no HTML
+  // inicial que o WhatsApp/Telegram/redes sociais leem — sem depender do JS.
+  loader: async ({ params }) => {
+    const origin = resolveRequestOrigin();
+    let itinerary: PublicItinerary | null = null;
+    let notFound = false;
+    try {
+      itinerary = await getPublicItinerary(params.slug);
+    } catch (error) {
+      if (error instanceof ItineraryNotFoundError) {
+        notFound = true;
+      }
+      // Outros erros: deixamos o componente refazer a busca e exibir o estado.
+    }
+    return { itinerary, notFound, origin };
+  },
+  head: ({ params, loaderData }) => {
+    const meta = buildPublicItineraryMeta(
+      loaderData?.itinerary ?? null,
+      params.slug,
+      loaderData?.origin ?? "",
+    );
+    // Roteiro encontrado vira indexável; ausente/privado permanece noindex.
+    const indexable = Boolean(loaderData?.itinerary);
+    return {
+      meta: publicItineraryHeadMeta(meta, indexable),
+      links: publicItineraryHeadLinks(meta),
+    };
+  },
   component: PublicItineraryPage,
 });
 
 function PublicItineraryPage() {
   const { slug } = Route.useParams();
+  const loaderData = Route.useLoaderData();
   const { data, isLoading, error } = useQuery({
     queryKey: ["public-itinerary", slug],
     queryFn: () => getPublicItinerary(slug),
     retry: false,
+    // Reaproveita o roteiro já buscado no loader (SSR), evitando flash de loading.
+    initialData: loaderData.itinerary ?? undefined,
   });
 
   const notFound = error instanceof ItineraryNotFoundError;
