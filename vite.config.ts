@@ -12,4 +12,25 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          // Split the monolithic vendor chunk so no single chunk dominates the
+          // initial payload. Each group changes independently, improving caching.
+          manualChunks(id) {
+            if (!id.includes("node_modules")) return;
+            if (id.includes("@supabase")) return "supabase";
+            if (
+              id.includes("/react-dom/") ||
+              id.includes("/react/") ||
+              id.includes("/scheduler/")
+            )
+              return "react";
+            if (id.includes("@tanstack")) return "tanstack";
+          },
+        },
+      },
+    },
+  },
 });
