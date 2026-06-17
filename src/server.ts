@@ -71,23 +71,31 @@ function withSecurityHeaders(request: Request, response: Response): Response {
       "base-uri 'self'",
       "connect-src 'self' https://*.supabase.co",
       "font-src 'self'",
+      "form-action 'self'",
       "frame-ancestors 'none'",
+      "frame-src 'none'",
       "img-src 'self' data: https:",
+      "manifest-src 'self'",
+      "media-src 'none'",
       "object-src 'none'",
       "script-src 'self' 'unsafe-inline'",
+      "script-src-attr 'none'",
       "style-src 'self' 'unsafe-inline'",
       "upgrade-insecure-requests",
     ].join("; "),
   );
   headers.set("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
   headers.set("Cross-Origin-Resource-Policy", "same-origin");
+  headers.set("Origin-Agent-Cluster", "?1");
   headers.set("Permissions-Policy", "camera=(), geolocation=(), microphone=(), payment=(), usb=()");
   headers.set("Referrer-Policy", "no-referrer");
+  headers.set("X-DNS-Prefetch-Control", "off");
   headers.set("X-Content-Type-Options", "nosniff");
   headers.set("X-Frame-Options", "DENY");
+  headers.set("X-Permitted-Cross-Domain-Policies", "none");
 
   if (url.protocol === "https:") {
-    headers.set("Strict-Transport-Security", "max-age=31536000");
+    headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
   }
 
   if (isPrivateOrAuthResponse(url, response)) {
@@ -103,7 +111,13 @@ function withSecurityHeaders(request: Request, response: Response): Response {
 }
 
 function isPrivateOrAuthResponse(url: URL, response: Response): boolean {
-  const privatePaths = ["/compartilhar", "/meu-roteiro", "/meus-roteiros", "/minha-conta"];
+  const privatePaths = [
+    "/compartilhar",
+    "/contribuir",
+    "/meu-roteiro",
+    "/meus-roteiros",
+    "/minha-conta",
+  ];
   const hasAuthParams = ["code", "error", "error_description"].some((key) =>
     url.searchParams.has(key),
   );

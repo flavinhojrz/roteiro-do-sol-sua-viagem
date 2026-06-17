@@ -1,5 +1,6 @@
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const PUBLIC_SLUG_PATTERN = /^[a-z0-9]{10,64}$/;
+const CATALOG_SLUG_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,78}[a-z0-9])?$/;
 
 export function isUuid(value: unknown): value is string {
   return typeof value === "string" && UUID_PATTERN.test(value);
@@ -7,6 +8,10 @@ export function isUuid(value: unknown): value is string {
 
 export function isPublicSlug(value: unknown): value is string {
   return typeof value === "string" && PUBLIC_SLUG_PATTERN.test(value);
+}
+
+export function isCatalogSlug(value: unknown): value is string {
+  return typeof value === "string" && CATALOG_SLUG_PATTERN.test(value);
 }
 
 export function sanitizeItineraryName(value: unknown): string | null {

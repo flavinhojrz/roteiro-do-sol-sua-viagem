@@ -360,12 +360,13 @@ Os créditos, licença, texto alternativo e URL de origem também são registrad
 
 ### Aplicação
 
-| Variável            | Obrigatória | Exposição | Uso                                   |
-| ------------------- | ----------- | --------- | ------------------------------------- |
-| `VITE_SUPABASE_URL` | Sim         | Pública   | URL do projeto Supabase               |
-| `VITE_SUPABASE_KEY` | Sim         | Pública   | Chave publishable ou anon do frontend |
+| Variável            | Obrigatória | Exposição | Uso                                                     |
+| ------------------- | ----------- | --------- | ------------------------------------------------------- |
+| `VITE_SUPABASE_URL` | Sim         | Pública   | URL do projeto Supabase                                 |
+| `VITE_SUPABASE_KEY` | Sim         | Pública   | Chave publishable ou anon do frontend                   |
+| `PUBLIC_SITE_URL`   | Produção    | Servidor  | Origem canônica usada em metadados de compartilhamento  |
 
-Essas são as únicas variáveis necessárias para executar a aplicação localmente. Como possuem o prefixo `VITE_`, seus valores são incorporados ao bundle do navegador durante a build. A segurança dos dados não depende de esconder essa chave pública, mas das policies de RLS e das RPCs configuradas no Supabase.
+As variáveis `VITE_` são incorporadas ao bundle do navegador durante a build. A segurança dos dados não depende de esconder essa chave pública, mas das policies de RLS e das RPCs configuradas no Supabase. Em produção, defina `PUBLIC_SITE_URL` (ou `SITE_URL`) com o domínio final, por exemplo `https://roteiro.example`, para que canonical/Open Graph não dependam de cabeçalhos encaminhados pelo proxy.
 
 ### Scripts administrativos
 

@@ -10,6 +10,7 @@ import { publicObjectUrl, uploadPublicObject } from "./storage";
 const BUCKET = "contributions";
 const MAX_PHOTOS = 4;
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+const PHOTO_UPLOAD_PREFIX = "pending";
 const ALLOWED_TYPES: Record<string, string> = {
   "image/jpeg": "jpg",
   "image/png": "png",
@@ -103,19 +104,14 @@ export async function submitContribution(input: ContributionInput): Promise<void
 
   const photos = input.photos.slice(0, MAX_PHOTOS);
   for (const file of photos) {
-    if (!ALLOWED_TYPES[file.type]) {
-      throw new ContributionError("Use fotos em JPG, PNG ou WEBP.", `bad type ${file.type}`);
-    }
-    if (file.size > MAX_PHOTO_BYTES) {
-      throw new ContributionError("Cada foto deve ter no máximo 5 MB.", `too big ${file.size}`);
-    }
+    await assertSafePhoto(file);
   }
 
   // Sobe as fotos primeiro; só então registra a contribuição.
-  const prefix = placeId ?? "novo";
+  const submissionId = randomUuid();
   const photoPaths: string[] = [];
   for (const file of photos) {
-    const path = `${prefix}/${crypto.randomUUID()}.${ALLOWED_TYPES[file.type]}`;
+    const path = `${PHOTO_UPLOAD_PREFIX}/${submissionId}/${randomUuid()}.${ALLOWED_TYPES[file.type]}`;
     try {
       await uploadPublicObject(BUCKET, path, file);
     } catch (error) {
@@ -153,6 +149,60 @@ export async function submitContribution(input: ContributionInput): Promise<void
       error.message ?? "rpc error",
     );
   }
+}
+
+function randomUuid(): string {
+  const id = globalThis.crypto?.randomUUID?.();
+  if (!id || !isUuid(id)) {
+    throw new ContributionError(
+      "Não conseguimos preparar o envio com segurança. Atualize o navegador e tente novamente.",
+      "crypto.randomUUID unavailable",
+    );
+  }
+  return id;
+}
+
+async function assertSafePhoto(file: File): Promise<void> {
+  if (!ALLOWED_TYPES[file.type]) {
+    throw new ContributionError("Use fotos em JPG, PNG ou WEBP.", `bad type ${file.type}`);
+  }
+  if (file.size <= 0) {
+    throw new ContributionError("A foto parece estar vazia ou corrompida.", "empty file");
+  }
+  if (file.size > MAX_PHOTO_BYTES) {
+    throw new ContributionError("Cada foto deve ter no máximo 5 MB.", `too big ${file.size}`);
+  }
+
+  const head = new Uint8Array(await file.slice(0, 16).arrayBuffer());
+  if (!matchesImageSignature(file.type, head)) {
+    throw new ContributionError(
+      "A foto não parece ser um JPG, PNG ou WEBP válido.",
+      `bad signature ${file.type}`,
+    );
+  }
+}
+
+function matchesImageSignature(type: string, bytes: Uint8Array): boolean {
+  if (type === "image/jpeg") {
+    return bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  }
+
+  if (type === "image/png") {
+    const png = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+    return png.every((value, index) => bytes[index] === value);
+  }
+
+  if (type === "image/webp") {
+    return (
+      bytes.length >= 12 && asciiAt(bytes, 0, 4) === "RIFF" && asciiAt(bytes, 8, 12) === "WEBP"
+    );
+  }
+
+  return false;
+}
+
+function asciiAt(bytes: Uint8Array, start: number, end: number): string {
+  return String.fromCharCode(...bytes.slice(start, end));
 }
 
 type ContributionRow = {

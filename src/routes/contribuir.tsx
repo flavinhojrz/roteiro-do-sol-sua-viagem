@@ -18,16 +18,19 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useSession } from "@/lib/auth/session";
+import { isCatalogSlug } from "@/lib/security/validation";
 import { ContributionError, submitContribution } from "@/lib/supabase/contributions";
 import { getPublishedPlaces } from "@/lib/supabase/places";
 import { cn } from "@/lib/utils";
 
 const OTHER = "__other__";
 const MAX_PHOTOS = 4;
+const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+const ALLOWED_PHOTO_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 export const Route = createFileRoute("/contribuir")({
   validateSearch: (search: Record<string, unknown>): { place?: string } => ({
-    place: typeof search.place === "string" ? search.place : undefined,
+    place: isCatalogSlug(search.place) ? search.place : undefined,
   }),
   head: () => ({
     meta: [
@@ -85,7 +88,24 @@ function ContribuirPage() {
 
   function addPhotos(list: FileList | null) {
     if (!list) return;
-    setPhotos((prev) => [...prev, ...Array.from(list)].slice(0, MAX_PHOTOS));
+    const accepted: File[] = [];
+    let rejected = false;
+
+    for (const file of Array.from(list)) {
+      if (!ALLOWED_PHOTO_TYPES.has(file.type) || file.size <= 0 || file.size > MAX_PHOTO_BYTES) {
+        rejected = true;
+        continue;
+      }
+      accepted.push(file);
+    }
+
+    if (rejected) {
+      toast.error("Algumas fotos foram ignoradas", {
+        description: "Use JPG, PNG ou WEBP com no máximo 5 MB por arquivo.",
+      });
+    }
+
+    setPhotos((prev) => [...prev, ...accepted].slice(0, MAX_PHOTOS));
   }
 
   function removePhoto(index: number) {
