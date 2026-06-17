@@ -6,9 +6,13 @@
 
 Eu desenhei e implementei este site do início ao fim, unindo turismo, design e desenvolvimento em uma experiência que pretendo continuar aprimorando e transformando em algo cada vez mais completo e real.
 
+<p>
+  <a href="https://roteiro-do-sol-sua-viagem-swart.vercel.app/"><strong>Acessar o Roteiro do Sol</strong></a>
+</p>
+
 </div>
 
-![Tela inicial do Roteiro do Sol, com chamada para criar um roteiro personalizado em Natal](./public/readme-hero.png)
+[![Tela inicial do Roteiro do Sol, com chamada para criar um roteiro personalizado em Natal](./public/readme-hero.png)](https://roteiro-do-sol-sua-viagem-swart.vercel.app/)
 
 O site conduz a pessoa por um quiz curto sobre companhia, duração da viagem, interesses, orçamento e distância desejada. Com essas respostas, ele classifica lugares reais cadastrados no Supabase, permite montar uma seleção própria e, após autenticação com Google, gera um link público para compartilhar.
 
@@ -16,6 +20,7 @@ O site conduz a pessoa por um quiz curto sobre companhia, duração da viagem, i
 
 ## Sumário
 
+- [Projeto no ar](#projeto-no-ar)
 - [Sobre o projeto](#sobre-o-projeto)
 - [O que já construí](#o-que-já-construí)
 - [Fluxo principal](#fluxo-principal)
@@ -26,7 +31,6 @@ O site conduz a pessoa por um quiz curto sobre companhia, duração da viagem, i
 - [Configuração local](#configuração-local)
 - [Configuração do Supabase](#configuração-do-supabase)
 - [Variáveis de ambiente](#variáveis-de-ambiente)
-- [Publicação na Vercel](#publicação-na-vercel)
 - [Importação do catálogo](#importação-do-catálogo)
 - [Scripts disponíveis](#scripts-disponíveis)
 - [Rotas da aplicação](#rotas-da-aplicação)
@@ -37,6 +41,16 @@ O site conduz a pessoa por um quiz curto sobre companhia, duração da viagem, i
 - [Qualidade e testes](#qualidade-e-testes)
 - [Estado atual](#estado-atual)
 - [Onde quero chegar](#onde-quero-chegar)
+
+## Projeto no ar
+
+A versão atual está publicada e pode ser acessada em:
+
+### [roteiro-do-sol-sua-viagem-swart.vercel.app](https://roteiro-do-sol-sua-viagem-swart.vercel.app/)
+
+No site, já é possível responder ao quiz, explorar as recomendações, conhecer os lugares cadastrados, montar um roteiro, entrar com o Google, salvar a seleção e gerar um link público para compartilhamento.
+
+Essa publicação representa o estado real do projeto em desenvolvimento. Continuarei evoluindo tanto a experiência quanto o catálogo e as funcionalidades disponíveis.
 
 ## Sobre o projeto
 
@@ -330,18 +344,6 @@ Para desenvolvimento, permita a origem:
 http://localhost:8080/**
 ```
 
-Em produção, defina a **Site URL** com o domínio oficial e adicione exatamente as páginas usadas como retorno do login:
-
-```text
-https://seu-dominio.example
-https://seu-dominio.example/compartilhar
-https://seu-dominio.example/meu-roteiro
-https://seu-dominio.example/meus-roteiros
-https://seu-dominio.example/minha-conta
-```
-
-Evite wildcard no domínio oficial. Para deployments temporários de Preview da Vercel, o Supabase aceita um padrão separado como `https://*-SEU-USUARIO.vercel.app/**`.
-
 O login por magic link existe na camada de autenticação, mas não está habilitado no fluxo principal enquanto o projeto não tiver uma configuração própria de SMTP.
 
 ### Storage
@@ -363,7 +365,7 @@ Os créditos, licença, texto alternativo e URL de origem também são registrad
 | `VITE_SUPABASE_URL` | Sim         | Pública   | URL do projeto Supabase               |
 | `VITE_SUPABASE_KEY` | Sim         | Pública   | Chave publishable ou anon do frontend |
 
-Essas são as únicas variáveis que o deploy da Vercel precisa atualmente. Como possuem o prefixo `VITE_`, seus valores são incorporados ao bundle do navegador durante a build. A segurança dos dados não depende de esconder essa chave pública, mas das policies de RLS e das RPCs configuradas no Supabase.
+Essas são as únicas variáveis necessárias para executar a aplicação localmente. Como possuem o prefixo `VITE_`, seus valores são incorporados ao bundle do navegador durante a build. A segurança dos dados não depende de esconder essa chave pública, mas das policies de RLS e das RPCs configuradas no Supabase.
 
 ### Scripts administrativos
 
@@ -373,7 +375,7 @@ Essas são as únicas variáveis que o deploy da Vercel precisa atualmente. Como
 | `SUPABASE_SECRET_KEY`       | Sim         | Secreta        | Chave administrativa moderna |
 | `SUPABASE_SERVICE_ROLE_KEY` | Alternativa | Secreta        | Chave legada `service_role`  |
 
-`SUPABASE_URL` pode usar `VITE_SUPABASE_URL` como fallback. Já a chave administrativa nunca deve usar prefixo `VITE_`, nunca deve ser commitada, nunca deve ser enviada ao navegador e **não deve ser cadastrada na Vercel**.
+`SUPABASE_URL` pode usar `VITE_SUPABASE_URL` como fallback. Já a chave administrativa nunca deve usar prefixo `VITE_`, nunca deve ser commitada nem enviada ao navegador.
 
 Para preparar o ambiente administrativo local:
 
@@ -389,94 +391,6 @@ SUPABASE_SECRET_KEY=sb_secret_...
 ```
 
 Os arquivos reais `.env*` são ignorados pelo Git. Somente `.env.example` e `.env.admin.example`, que contêm placeholders, ficam versionados.
-
-## Publicação na Vercel
-
-O projeto usa o preset `vercel` do Nitro para transformar o servidor TanStack Start em uma Vercel Function e gerar os assets no formato da [Build Output API](https://vercel.com/docs/build-output-api/v3).
-
-A build produz:
-
-```text
-.vercel/output/
-├── config.json
-├── functions/
-│   └── __server.func/
-└── static/
-```
-
-Essa pasta é gerada automaticamente e está no `.gitignore`.
-
-### 1. Importe o repositório
-
-No painel da Vercel, escolha **Add New > Project** e importe o repositório do GitHub.
-
-O arquivo `vercel.json` já define:
-
-- instalação com `bun install --frozen-lockfile`;
-- build com `bun run build`;
-- uso direto da saída gerada pelo Nitro, sem tratar o projeto como um site Vite estático.
-
-Não configure manualmente um **Output Directory** no painel. A Vercel deve consumir `.vercel/output`, que já contém assets, rotas e função SSR.
-
-### 2. Cadastre as variáveis
-
-Em **Settings > Environment Variables**, adicione:
-
-```text
-VITE_SUPABASE_URL
-VITE_SUPABASE_KEY
-```
-
-Cadastre ambas em **Production** e **Preview** caso queira que os deployments de branches funcionem.
-
-Não cadastre:
-
-```text
-SUPABASE_SECRET_KEY
-SUPABASE_SERVICE_ROLE_KEY
-```
-
-Essas chaves ignoram RLS e devem permanecer somente no ambiente administrativo local.
-
-### 3. Confira o runtime
-
-O `package.json` fixa Node.js `24.x`, versão suportada pela Vercel, e Bun `1.3.13` para instalação reproduzível. A função gerada pelo Nitro usa o runtime `nodejs24.x`.
-
-### 4. Configure autenticação e domínio
-
-Depois que a Vercel gerar o domínio:
-
-1. Defina esse domínio como **Site URL** no Supabase Auth.
-2. Cadastre as URLs exatas de retorno listadas na seção [Google OAuth](#google-oauth).
-3. Adicione o domínio personalizado na Vercel, caso exista.
-4. Atualize a Site URL e os redirects do Supabase para o domínio definitivo.
-
-O Google OAuth continua usando a callback do próprio Supabase. Na aplicação, o `redirectTo` retorna para o domínio que iniciou o login.
-
-### 5. Faça as verificações finais
-
-Antes de publicar:
-
-```bash
-bun install --frozen-lockfile
-bun run check
-```
-
-Depois do deploy, confira:
-
-- carregamento da home e das rotas internas por acesso direto;
-- login e logout com Google;
-- criação, edição e exclusão de roteiro;
-- página pública `/r/:slug`;
-- preview Open Graph do link compartilhado;
-- ausência de chaves administrativas no painel e nos logs da Vercel.
-
-Referências oficiais:
-
-- [TanStack Start na Vercel](https://vercel.com/docs/frameworks/full-stack/tanstack-start)
-- [Preset Vercel do Nitro](https://nitro.build/deploy/providers/vercel)
-- [Redirect URLs do Supabase Auth](https://supabase.com/docs/guides/auth/redirect-urls)
-- [Versões do Node.js na Vercel](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions)
 
 ## Importação do catálogo
 
@@ -538,7 +452,7 @@ Os arquivos de imagem locais não são versionados. Somente o manifesto é manti
 | Comando                 | Descrição                                    |
 | ----------------------- | -------------------------------------------- |
 | `bun run dev`           | Inicia o ambiente de desenvolvimento         |
-| `bun run build`         | Gera a saída de produção para a Vercel       |
+| `bun run build`         | Gera a build de produção                     |
 | `bun run build:dev`     | Gera o build usando o modo `development`     |
 | `bun run preview`       | Serve localmente o build gerado              |
 | `bun run typecheck`     | Verifica os tipos TypeScript                 |
@@ -725,7 +639,6 @@ Alguns caminhos que pretendo explorar:
 - reativar o login por e-mail com SMTP próprio;
 - experimentar recomendações por IA executadas somente no servidor;
 - adicionar observabilidade sem coletar dados pessoais desnecessários;
-- documentar e automatizar o processo de deploy;
 - definir a licença do projeto.
 
 Mais do que concluir uma lista de funcionalidades, minha intenção é continuar evoluindo a ideia, aprender com o uso real e fazer com que o site se torne uma referência útil para descobrir o Rio Grande do Norte.

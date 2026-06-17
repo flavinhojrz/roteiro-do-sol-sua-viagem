@@ -14,6 +14,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as MinhaContaRouteImport } from './routes/minha-conta'
 import { Route as MeusRoteirosRouteImport } from './routes/meus-roteiros'
 import { Route as MeuRoteiroRouteImport } from './routes/meu-roteiro'
+import { Route as ContribuirRouteImport } from './routes/contribuir'
 import { Route as CompartilharRouteImport } from './routes/compartilhar'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RSlugRouteImport } from './routes/r.$slug'
@@ -44,6 +45,11 @@ const MeuRoteiroRoute = MeuRoteiroRouteImport.update({
   path: '/meu-roteiro',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContribuirRoute = ContribuirRouteImport.update({
+  id: '/contribuir',
+  path: '/contribuir',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CompartilharRoute = CompartilharRouteImport.update({
   id: '/compartilhar',
   path: '/compartilhar',
@@ -68,6 +74,7 @@ const LugarSlugRoute = LugarSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compartilhar': typeof CompartilharRoute
+  '/contribuir': typeof ContribuirRoute
   '/meu-roteiro': typeof MeuRoteiroRoute
   '/meus-roteiros': typeof MeusRoteirosRoute
   '/minha-conta': typeof MinhaContaRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compartilhar': typeof CompartilharRoute
+  '/contribuir': typeof ContribuirRoute
   '/meu-roteiro': typeof MeuRoteiroRoute
   '/meus-roteiros': typeof MeusRoteirosRoute
   '/minha-conta': typeof MinhaContaRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/compartilhar': typeof CompartilharRoute
+  '/contribuir': typeof ContribuirRoute
   '/meu-roteiro': typeof MeuRoteiroRoute
   '/meus-roteiros': typeof MeusRoteirosRoute
   '/minha-conta': typeof MinhaContaRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/compartilhar'
+    | '/contribuir'
     | '/meu-roteiro'
     | '/meus-roteiros'
     | '/minha-conta'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/compartilhar'
+    | '/contribuir'
     | '/meu-roteiro'
     | '/meus-roteiros'
     | '/minha-conta'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/compartilhar'
+    | '/contribuir'
     | '/meu-roteiro'
     | '/meus-roteiros'
     | '/minha-conta'
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompartilharRoute: typeof CompartilharRoute
+  ContribuirRoute: typeof ContribuirRoute
   MeuRoteiroRoute: typeof MeuRoteiroRoute
   MeusRoteirosRoute: typeof MeusRoteirosRoute
   MinhaContaRoute: typeof MinhaContaRoute
@@ -184,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MeuRoteiroRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contribuir': {
+      id: '/contribuir'
+      path: '/contribuir'
+      fullPath: '/contribuir'
+      preLoaderRoute: typeof ContribuirRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/compartilhar': {
       id: '/compartilhar'
       path: '/compartilhar'
@@ -218,6 +238,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompartilharRoute: CompartilharRoute,
+  ContribuirRoute: ContribuirRoute,
   MeuRoteiroRoute: MeuRoteiroRoute,
   MeusRoteirosRoute: MeusRoteirosRoute,
   MinhaContaRoute: MinhaContaRoute,

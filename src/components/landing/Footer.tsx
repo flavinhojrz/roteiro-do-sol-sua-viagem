@@ -34,6 +34,9 @@ export function Footer() {
           <a href="#lugares" className="hover:text-sun transition-colors">
             Exemplos
           </a>
+          <Link to="/contribuir" className="hover:text-sun transition-colors">
+            Deixar opinião
+          </Link>
           {loading ? (
             <span className="text-white/40">Carregando conta...</span>
           ) : session ? (

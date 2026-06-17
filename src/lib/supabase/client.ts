@@ -1,8 +1,8 @@
 import { GoTrueClient } from "@supabase/auth-js";
 import { PostgrestClient } from "@supabase/postgrest-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabasePublishableKey = import.meta.env.VITE_SUPABASE_KEY;
+export const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+export const supabasePublishableKey = import.meta.env.VITE_SUPABASE_KEY;
 
 if (!supabaseUrl) {
   throw new Error("Missing VITE_SUPABASE_URL");
@@ -43,7 +43,9 @@ const fetchWithAuth: typeof fetch = async (input, init) => {
   return fetch(input, { ...init, headers });
 };
 
-async function getAccessToken(): Promise<string> {
+// Token da sessão atual (ou a chave pública quando não há login). Exposto para
+// outras chamadas REST que precisam da mesma autenticação (ex.: Storage).
+export async function getAccessToken(): Promise<string> {
   const { data } = await auth.getSession();
   return data.session?.access_token ?? supabasePublishableKey;
 }

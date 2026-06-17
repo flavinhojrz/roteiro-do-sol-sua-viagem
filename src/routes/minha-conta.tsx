@@ -5,6 +5,7 @@ import {
   Loader2,
   LogOut,
   Mail,
+  MessageSquarePlus,
   ShieldCheck,
   Trash2,
   UserRound,
@@ -144,6 +145,29 @@ function MinhaContaPage() {
                   {leaving ? <Loader2 size={16} className="animate-spin" /> : <LogOut size={16} />}
                   {leaving ? "Saindo..." : "Sair da conta"}
                 </button>
+              </div>
+            </section>
+
+            <section className="overflow-hidden rounded-3xl bg-gradient-sun p-6 shadow-coral md:p-8">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="max-w-xl">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/40 text-ink">
+                    <MessageSquarePlus size={22} />
+                  </div>
+                  <h2 className="mt-4 font-display text-xl font-extrabold text-ink">
+                    Contribua com a comunidade
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-ink/75">
+                    Deixe sua opinião, sugira lugares, conte preços reais e compartilhe fotos. Com
+                    seu nome ou anônimo — você decide.
+                  </p>
+                </div>
+                <Link
+                  to="/contribuir"
+                  className="press inline-flex shrink-0 items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-bold text-white hover:bg-sea sm:ml-auto"
+                >
+                  Contribuir
+                </Link>
               </div>
             </section>
 

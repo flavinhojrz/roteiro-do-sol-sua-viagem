@@ -16,6 +16,7 @@
     "check": "bun run typecheck && bun run lint && bun run build",
     "import:places": "bun --env-file=.env.admin.local run src/scripts/import-places-to-supabase.ts",
     "import:images": "bun --env-file=.env.admin.local run src/scripts/import-place-images-to-supabase.ts",
+    "moderate:contributions": "bun --env-file=.env.admin.local run src/scripts/moderate-contributions.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
